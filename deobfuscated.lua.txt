@@ -1,0 +1,6212 @@
+-- This file was generated at discord.gg/syncrypt
+
+local t1 = {}
+local v2 = unpack or table.unpack
+t1.value1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+t1.value2 = game:GetService("Players")
+t1.value3 = game:GetService("RunService")
+t1.value4 = game:GetService("TweenService")
+t1.value5 = game:GetService("TeleportService")
+t1.value6 = game:GetService("ReplicatedStorage")
+t1.value7 = game:GetService("Workspace")
+t1.value8 = game:GetService("HttpService")
+
+local UserInputService = game:GetService("UserInputService")
+
+t1.value9 = t1.value2.LocalPlayer
+t1.value10 = {}
+t1.value11 = {}
+t1.value12 = {}
+t1.value13 = {}
+t1.value10.Rarities = {
+	"Common",
+	"Uncommon",
+	"Rare",
+	"Epic",
+	"Legendary",
+	"Mythic",
+	"Cosmic",
+	"Secret",
+	"Divine",
+	"Eternal"
+}
+t1.value14 = {
+	AutoSteal = false,
+	FarmMethod = "Speed",
+	AntiTrap = true,
+	AreaFocus = {},
+	RarityFilter = {},
+	SecretPriority = true,
+	AutoHop = false,
+	MaxHops = 15,
+	HopDelay = 20,
+	HopCount = 0,
+	AutoHatch = false,
+	HatchOnce = false,
+	EggESP = false,
+	FpsBoost = false,
+	AutoEquipBest = false,
+	AutoClaim = false,
+	ClaimInterval = 20,
+	AutoUpgrade = false,
+	UpgradeInterval = 30,
+	AutoTreadmill = false,
+	AutoUpgradeTreadmill = false,
+	AntiCheat = false,
+	HumReady = false,
+	Unloaded = false
+}
+t1.value15 = {}
+t1.value16 = {}
+function t1.value17()
+    return not t1.value14.Unloaded
+end
+function t1.value18(p1, p2, p3)
+    local u122 = p2
+    local u121 = p3
+    pcall(function()
+        local value1 = t1.value1
+        local v1011 = p1
+        local v1012 = u122
+        local Notify = value1.Notify
+        local v1014 = u121 or 4
+
+        Notify(value1, {
+			Title = v1011,
+			Content = v1012,
+			Duration = v1014
+		})
+    end)
+end
+t1.value11.hostGui = type(gethui) == "function" and gethui() or game:GetService("CoreGui")
+t1.value11.warnLayer = nil
+local function v4(p4)
+    local thread = task.spawn(function()
+        xpcall(p4, function(err)
+            warn("[Shard] " .. tostring(err) .. "\n" .. debug.traceback())
+        end)
+    end)
+
+    t1.value15[#t1.value15 + 1] = thread
+
+    return thread
+end
+t1.value19 = nil
+function t1.value19()
+    if t1.value11.warnLayer and t1.value11.warnLayer.Parent then
+        return t1.value11.warnLayer
+    end
+
+    return pcall(function()
+        local ScreenGui = Instance.new("ScreenGui")
+
+        ScreenGui.Name = "ShardWarn"
+        ScreenGui.ResetOnSpawn = false
+        ScreenGui.IgnoreGuiInset = true
+        ScreenGui.DisplayOrder = 9999
+        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ScreenGui.Parent = t1.value11.hostGui
+        t1.value11.warnLayer = ScreenGui
+    end) and t1.value11.warnLayer or nil
+end
+function t1.value20(p5, p6)
+    local v128 = t1.value19()
+
+    if not v128 then
+        return
+    end
+
+    local u129 = p6 or 4
+
+    pcall(function()
+        local Frame = Instance.new("Frame")
+
+        Frame.AnchorPoint = Vector2.new(1, 1)
+        Frame.Position = UDim2.new(1, 20, 1, -22)
+        Frame.Size = UDim2.fromOffset(232, 54)
+        Frame.BackgroundColor3 = Color3.fromRGB(22, 22, 26)
+        Frame.BorderSizePixel = 0
+        Frame.Parent = v128
+
+        local UICorner = Instance.new("UICorner")
+
+        UICorner.CornerRadius = UDim.new(0, 10)
+        UICorner.Parent = Frame
+
+        local UIStroke = Instance.new("UIStroke")
+
+        UIStroke.Thickness = 1
+        UIStroke.Color = Color3.fromRGB(238, 168, 62)
+        UIStroke.Transparency = 0.35
+        UIStroke.Parent = Frame
+
+        local Frame2 = Instance.new("Frame")
+
+        Frame2.Size = UDim2.new(0, 3, 1, -16)
+        Frame2.Position = UDim2.new(0, 8, 0, 8)
+        Frame2.BackgroundColor3 = Color3.fromRGB(238, 168, 62)
+        Frame2.BorderSizePixel = 0
+        Frame2.Parent = Frame
+
+        local UICorner2 = Instance.new("UICorner")
+
+        UICorner2.CornerRadius = UDim.new(1, 0)
+        UICorner2.Parent = Frame2
+
+        local TextLabel = Instance.new("TextLabel")
+
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.Position = UDim2.new(0, 20, 0, 9)
+        TextLabel.Size = UDim2.new(1, -30, 0, 16)
+        TextLabel.Font = Enum.Font.GothamBold
+        TextLabel.TextSize = 12
+        TextLabel.TextColor3 = Color3.fromRGB(238, 168, 62)
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel.Text = "Warning"
+        TextLabel.Parent = Frame
+
+        local TextLabel2 = Instance.new("TextLabel")
+
+        TextLabel2.BackgroundTransparency = 1
+        TextLabel2.Position = UDim2.new(0, 20, 0, 27)
+        TextLabel2.Size = UDim2.new(1, -30, 0, 18)
+        TextLabel2.Font = Enum.Font.Gotham
+        TextLabel2.TextSize = 12
+        TextLabel2.TextColor3 = Color3.fromRGB(206, 206, 212)
+        TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel2.TextTruncate = Enum.TextTruncate.AtEnd
+        TextLabel2.Text = p5
+        TextLabel2.Parent = Frame
+        t1.value4:Create(Frame, TweenInfo.new(0.28, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+			Position = UDim2.new(1, -18, 1, -22)
+		}):Play()
+        task.delay(u129, function()
+            local v1233 = t1.value4:Create(Frame, TweenInfo.new(0.24, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+				Position = UDim2.new(1, 260, 1, -22)
+			})
+
+            v1233:Play()
+            v1233.Completed:Wait()
+            Frame:Destroy()
+        end)
+    end)
+end
+local function v5(p7)
+    t1.value16[#t1.value16 + 1] = p7
+
+    return p7
+end
+function t1.value21()
+    local Character = t1.value9.Character
+
+    return Character and Character:FindFirstChild("HumanoidRootPart") or nil
+end
+function t1.value22()
+    local Character = t1.value9.Character
+
+    return Character and Character:FindFirstChildWhichIsA("Humanoid") or nil
+end
+function t1.value23()
+    local v132 = t1.value22()
+
+    return t1.value21() ~= nil and (v132 ~= nil and v132.Health > 0)
+end
+t1.value10.HUM_COPY = {
+	"RigType",
+	"HipHeight",
+	"JumpPower",
+	"JumpHeight",
+	"UseJumpPower",
+	"AutoRotate",
+	"MaxSlopeAngle",
+	"DisplayDistanceType",
+	"NameDisplayDistance",
+	"HealthDisplayDistance",
+	"AutomaticScalingEnabled",
+	"BreakJointsOnDeath",
+	"RequiresNeck",
+	"EvaluateStateMachine"
+}
+local function v6()
+    local Character = t1.value9.Character
+    local v134 = Character and Character:FindFirstChildWhichIsA("Humanoid")
+    if not Character or not v134 then
+        return false
+    end
+    local t2 = {}
+    for _, v in ipairs(t1.value10.HUM_COPY) do
+        local v138 = v
+        local ok, result = pcall(function()
+            return v134[v138]
+        end)
+
+        if ok then
+            t2[v138] = result
+        end
+    end
+    local WalkSpeed = v134.WalkSpeed
+    pcall(function()
+        v134:Destroy()
+    end)
+    t1.value3.Heartbeat:Wait()
+    local Humanoid = Instance.new("Humanoid")
+    for v145, v146 in pairs(t2) do
+
+        local v147 = v145
+        local v148 = v146
+
+        pcall(function()
+            Humanoid[v147] = v148
+        end)
+    end
+    Humanoid.Parent = Character
+    t1.value3.Heartbeat:Wait()
+    if Character ~= Humanoid.Parent then
+        return false
+    end
+    Humanoid.WalkSpeed = WalkSpeed
+    pcall(function()
+        Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+    end)
+    local CurrentCamera = t1.value7.CurrentCamera
+    if CurrentCamera then
+        pcall(function()
+            CurrentCamera.CameraSubject = Humanoid
+        end)
+    end
+    t1.value14.HumReady = true
+
+    return true
+end
+t1.value24 = t1.value6:FindFirstChild("Packages")
+t1.value24 = t1.value24 and t1.value24:FindFirstChild("Networking") or nil
+t1.value25 = {
+	EggSnapshot = "RF/EggWorld/AskFieldEggSnapshot",
+	EggCarry = "RF/EggWorld/AskFieldEggCarry",
+	EggPlace = "RF/EggWorld/AskPlaceEgg",
+	EggDrop = "RF/EggWorld/AskFieldEggDrop",
+	EggLive = "RF/EggWorld/AskLiveSnapshot",
+	EggRarityShow = "RF/EggWorld/AskFieldEggRarityShows",
+	Hatch = "RF/EggWorld/AskHatch",
+	HatchFinish = "RF/EggWorld/AskFinishHatch",
+	SkipGrowth = "RF/EggWorld/AskSkipGrowth",
+	PlotState = "RF/Homestead/AskState",
+	BaseTierRaise = "RE/Homestead/AskBaseTierRaise",
+	NearbyBuy = "RE/Homestead/AskNearbyPurchase",
+	Collect = "RF/AwayEarnings/AskCollect",
+	PendingCheck = "RF/AwayEarnings/PendingCheck",
+	CodexAll = "RF/Codex/AskRedeemAll",
+	WearBest = "RF/Haul/WearBest",
+	SatchelSale = "RF/Haul/OfferFullSatchelSale",
+	SellEveryPet = "RE/PetSatchel/SellEveryPet",
+	SellPet = "RE/PetSatchel/SellPet",
+	PetSnapshot = "RF/PenRoster/AskLiveSnapshot",
+	PetSale = "RF/PenRoster/AskSale",
+	PetWear = "RF/PenRoster/AskWear",
+	PetDoff = "RF/PenRoster/AskDoff",
+	TreadRaise = "RF/Treadmill/AskTierRaise",
+	TreadRender = "RF/Treadmill/AskRenderSnapshot",
+	WearTool = "RF/EggWorld/AskWearTool",
+	DoffTool = "RF/EggWorld/AskDoffTool",
+	RigWipe = "RE/RigSync/AskRigWipe"
+}
+t1.value26 = nil
+function t1.value26(p8)
+    local value24 = t1.value24
+
+    if value24 then
+        value24 = t1.value24:FindFirstChild(p8)
+    end
+
+    return value24 or nil
+end
+function t1.value27(p9, ...)
+    local v153 = t1.value26(p9)
+
+    if not v153 then
+        return nil
+    end
+
+    if v153:IsA("RemoteFunction") then
+        local ok, result = pcall(v153.InvokeServer, v153, ...)
+
+        return ok and result or nil
+    end
+
+    return pcall(v153.FireServer, v153, ...) or nil
+end
+function t1.value28()
+    local t3 = {}
+
+    if t1.value24 then
+        for _, child in ipairs(t1.value24:GetChildren()) do
+            if child:IsA("RemoteFunction") or child:IsA("RemoteEvent") then
+                t3[#t3 + 1] = child.Name
+            end
+        end
+    end
+
+    table.sort(t3)
+
+    return t3
+end
+local v7 = fireproximityprompt or syn and syn.fireproximityprompt
+t1.value29 = nil
+t1.value29 = v7
+function t1.value30(p10)
+    if not t1.value29 or (not p10 or not p10.Enabled) then
+        return false
+    end
+
+    pcall(function()
+        p10.HoldDuration = 0
+    end)
+
+    return pcall(t1.value29, p10)
+end
+function t1.value31(p11)
+    local v161 = t1.value21()
+    local v162 = p11 and p11.Parent
+    if not v161 or not v162 then
+        return false
+    end
+    local Position
+    if v162:IsA("BasePart") then
+        Position = v162.Position
+    elseif v162:IsA("Model") then
+        local ok, result = pcall(function()
+            return v162:GetPivot()
+        end)
+
+        Position = ok and result.Position or nil
+    elseif v162:IsA("Attachment") then
+        Position = v162.WorldPosition
+    end
+    if not Position then
+        return false
+    end
+    local v166 = p11.MaxActivationDistance > 0 and p11.MaxActivationDistance or 12
+
+    return (v161.Position - Position).Magnitude <= v166 + 4
+end
+function t1.value32(p12, p13)
+    local t4 = {}
+
+    if not p12 then
+        return t4
+    end
+
+    local GetDescendants = p12.GetDescendants
+
+    for _, v in ipairs(GetDescendants(p12)) do
+        if v:IsA("ProximityPrompt") and v.Enabled then
+            local v173 = (v.Name .. " " .. v.ActionText .. " " .. v.ObjectText):lower()
+
+            if v.Parent then
+                v173 ..= " " .. v.Parent.Name:lower()
+            end
+
+            for _, v3 in ipairs(p13) do
+                if v173:find(v3, 1, true) then
+                    t4[#t4 + 1] = v
+
+                    break
+                end
+            end
+        end
+    end
+
+    return t4
+end
+t1.value11.uidShape = {}
+function t1.value33(p14, p15)
+    local v178 = t1.value11.uidShape[p14]
+
+    if v178 ~= 2 then
+        local v179 = t1.value27(p14, {
+			Uid = p15
+		})
+
+        if v179 ~= nil and v179 ~= false then
+            t1.value11.uidShape[p14] = 1
+
+            return true
+        end
+
+        if v178 == 1 then
+            return false
+        end
+    end
+
+    local v180 = t1.value27(p14, p15)
+
+    if v180 ~= nil and v180 ~= false then
+        t1.value11.uidShape[p14] = 2
+
+        return true
+    end
+
+    return false
+end
+t1.value10.rarityLadder = {}
+for i, v in ipairs(t1.value10.Rarities) do
+    t1.value10.rarityLadder[v] = i
+end
+function t1.value34(p16)
+    if type(p16) ~= "string" then
+        return 0
+    end
+
+    return t1.value10.rarityLadder[p16] or 0
+end
+t1.value13.areaLabel = {}
+t1.value13.areaRarity = {}
+t1.value13.areaTierName = {}
+t1.value13.areaByLabel = {}
+t1.value13.areaOrder = {}
+function t1.value35(p17, p18, p19, p20)
+    if not p17 or t1.value13.areaLabel[p17] then
+        return
+    end
+
+    local v190 = p18 or p17
+
+    t1.value13.areaLabel[p17] = v190
+    t1.value13.areaRarity[p17] = p19 or 0
+    t1.value13.areaTierName[p17] = p20
+    t1.value13.areaByLabel[v190] = p17
+    t1.value13.areaOrder[#t1.value13.areaOrder + 1] = p17
+end
+function t1.value36()
+    table.sort(t1.value13.areaOrder, function(p21, p22)
+        local v1025 = t1.value13.areaRarity[p21]
+        local value13 = t1.value13
+        local v1027 = v1025 or 0
+        local v1028 = value13.areaRarity[p22] or 0
+
+        if v1027 == v1028 then
+            return tostring(t1.value13.areaLabel[p21]) < tostring(t1.value13.areaLabel[p22])
+        end
+
+        return v1027 < v1028
+    end)
+end
+function t1.value37()
+    local t5 = {}
+
+    for _, v in ipairs(t1.value13.areaOrder) do
+        t5[#t5 + 1] = t1.value13.areaLabel[v]
+    end
+
+    return t5
+end
+local Data = t1.value6:FindFirstChild("Data")
+
+t1.value38 = Data and Data:FindFirstChild("Areas")
+
+local ok, result = pcall(function()
+    return t1.value38 and require(t1.value38)
+end)
+local v13 = ok and (type(result) == "table" and (result.Directory or result)) or nil
+if type(v13) == "table" then
+    for k, v in pairs(v13) do
+        local v16 = k
+
+        if type(v16) == "string" and type(v) == "table" then
+            local n1 = 0
+            local v18
+            if type(v.Rarity) == "table" then
+                n1 = tonumber(v.Rarity.RarityNumber) or 0
+                v18 = v.Rarity.DisplayName or v.Rarity._id
+            end
+            t1.value35(v16, v.DisplayName or (v.Name or v16), n1, v18)
+        end
+    end
+end
+if #t1.value13.areaOrder == 0 then
+    local v19 = t1.value7:FindFirstChild("Areas") or t1.value7:FindFirstChild("Islands")
+
+    if v19 then
+        local n2 = 0
+        local GetChildren = v19.GetChildren
+
+        for _, v in ipairs(GetChildren(v19)) do
+            n2 += 1
+            t1.value35(v.Name, v.Name, n2, nil)
+        end
+    end
+end
+t1.value36()
+function t1.value39(p23)
+    local t6 = {}
+    local n3 = 0
+
+    if type(p23) == "table" then
+        for _, v in ipairs(p23) do
+            if type(v) == "string" and v ~= "" then
+                t6[v] = true
+                n3 += 1
+            end
+        end
+    end
+
+    return t6, n3
+end
+local value13 = t1.value13
+local value13_2 = t1.value13
+value13.areaWanted = {}
+value13_2.areaWantedCount = 0
+local value13_3 = t1.value13
+local value13_4 = t1.value13
+value13_3.rarityWanted = {}
+value13_4.rarityWantedCount = 0
+function t1.value40()
+    local v199 = t1.value39(t1.value14.AreaFocus)
+    local t7 = {}
+    local n4 = 0
+
+    for k in pairs(v199) do
+        local v203 = k
+
+        t7[t1.value13.areaByLabel[v203] or v203] = true
+        n4 += 1
+    end
+
+    local value13_5 = t1.value13
+    local value13_6 = t1.value13
+
+    value13_5.areaWanted = t7
+    value13_6.areaWantedCount = n4
+end
+t1.value41 = nil
+function t1.value42()
+    local value13_7 = t1.value13
+    local value13_8 = t1.value13
+    local v208, v209 = t1.value39(t1.value14.RarityFilter)
+
+    value13_7.rarityWanted = v208
+    value13_8.rarityWantedCount = v209
+end
+t1.value41 = {}
+function t1.value43(p24, p25)
+    local v212 = t1.value41[p24]
+
+    if not v212 then
+        return
+    end
+
+    if pcall(function()
+        v212:SetValue(p25)
+    end) then
+        return
+    end
+
+    pcall(function()
+        v212:Set(p25)
+    end)
+end
+function t1.value44(p26, p27)
+    local v215 = t1.value41[p26]
+
+    if not v215 then
+        return
+    end
+
+    if pcall(function()
+        v215:Refresh(p27)
+    end) then
+        return
+    end
+
+    pcall(function()
+        v215:SetValues(p27)
+    end)
+end
+t1.value11.slotsCache = nil
+t1.value45 = nil
+function t1.value45()
+    if t1.value11.slotsCache and t1.value11.slotsCache.Parent then
+        return t1.value11.slotsCache
+    end
+
+    t1.value11.slotsCache = t1.value7:FindFirstChild("AreaEggSlotsClient")
+
+    return t1.value11.slotsCache
+end
+t1.value46 = nil
+function t1.value46(p28)
+    local v218 = t1.value45()
+
+    if v218 then
+        v218 = v218:FindFirstChild(p28)
+    end
+
+    return v218 or nil
+end
+function t1.value47(p29)
+    local v220 = t1.value46(p29)
+
+    if not v220 then
+        return nil
+    end
+
+    return v220.PrimaryPart or (v220:FindFirstChild("Hitbox") or v220:FindFirstChildWhichIsA("BasePart"))
+end
+function t1.value48(p30)
+    if p30.BaseMutation then
+        return true
+    end
+
+    return type(p30.Mutations) == "table" and next(p30.Mutations) ~= nil
+end
+t1.value11.eggList = {}
+t1.value11.eggListAt = 0
+t1.value11.triedUids = {}
+t1.value11.failUids = {}
+t1.value11.areaDirty = false
+function t1.value49(p31)
+    if not p31 and tick() - t1.value11.eggListAt < 1.5 then
+        return t1.value11.eggList
+    end
+    local v225 = t1.value27(t1.value25.EggSnapshot)
+    local v226 = v225 and v225.Records
+    if type(v226) ~= "table" then
+        return t1.value11.eggList
+    end
+    local t8 = {}
+    local v228, v229, v230 = pairs(v226)
+    local g241
+    while true do
+        local v231
+
+        v230, v231 = v228(v229, v230)
+
+        if not v230 then
+            break
+        end
+
+        if not (v231.State == "Slot" and v231.Uid) then
+            continue
+        end
+
+        local v232 = t1.value47(v231.Uid)
+        local Position
+
+        if v232 then
+            Position = v232.Position
+        else
+            local v234 = v231.BoundsCFrame or v231.BottomCFrame
+
+            Position = v234 and v234.Position or nil
+        end
+
+        if not Position then
+            continue
+        end
+
+        local AreaId = v231.AreaId
+
+        if AreaId and not t1.value13.areaLabel[AreaId] then
+            local value35 = t1.value35
+            local v237 = #t1.value13.areaOrder + 1
+            local v238 = v231.Rarity or (v231.RarityName or (v231.Tier or v231.RarityId))
+
+            if type(v238) == "table" then
+                v238 = v238.DisplayName or (v238._id or (v238.Name or v238.Id))
+            end
+
+            value35(AreaId, AreaId, v237, type(v238) == "string" and v238 or nil)
+            t1.value11.areaDirty = true
+        end
+
+        local v239 = v231.Rarity or (v231.RarityName or (v231.Tier or v231.RarityId))
+
+        if type(v239) == "table" then
+            v239 = v239.DisplayName or (v239._id or (v239.Name or v239.Id))
+        end
+
+        local v240 = type(v239) == "string" and v239 or nil
+
+        if t1.value34(v240) == 0 then
+            v240 = nil
+        end
+
+        if not v240 then
+            repeat
+                if not g241 and AreaId then
+                    v240 = t1.value13.areaTierName[AreaId]
+
+                    if not v240 then
+                        g241 = true
+                    end
+                else
+                    g241 = false
+
+                    local v242 = v231.Rarity or (v231.RarityName or (v231.Tier or v231.RarityId))
+
+                    if type(v242) == "table" then
+                        v242 = v242.DisplayName or (v242._id or (v242.Name or v242.Id))
+                    end
+
+                    v240 = type(v242) == "string" and v242 or nil
+                end
+            until not g241
+        end
+
+        local v243 = #t8 + 1
+        local Uid = v231.Uid
+        local v245 = AreaId and t1.value13.areaLabel[AreaId] or "Unknown"
+        local v246 = AreaId and t1.value13.areaRarity[AreaId] or 0
+        local v247 = t1.value34(v240)
+        local v248 = t1.value48(v231)
+        local v249 = v231.BoundsSize and v231.BoundsSize.Magnitude or 3
+
+        t8[v243] = {
+			uid = Uid,
+			area = AreaId,
+			label = v245,
+			pos = Position,
+			tier = v246,
+			rarity = v240,
+			rank = v247,
+			mutated = v248,
+			size = v249
+		}
+    end
+    if t1.value11.areaDirty then
+        t1.value11.areaDirty = false
+        t1.value36()
+        t1.value40()
+        t1.value44("AreaFocus", t1.value37())
+    end
+    t1.value11.eggList = t8
+    t1.value11.eggListAt = tick()
+    local t9 = {}
+    for i = 1, #t8 do
+        t9[t8[i].uid] = true
+    end
+    local timestamp = tick()
+    for k, v in pairs(t1.value11.triedUids) do
+        local v255 = k
+
+        if not t9[v255] and timestamp - v > 300 then
+            t1.value11.triedUids[v255] = nil
+            t1.value11.failUids[v255] = nil
+        end
+    end
+
+    return t8
+end
+function t1.value50(p32)
+    local v257 = t1.value11.triedUids[p32.uid]
+
+    if v257 then
+        local v258 = t1.value11.failUids[p32.uid] or 0
+        local n5 = 6
+
+        if v258 >= 4 then
+            n5 = 600
+        elseif v258 == 3 then
+            n5 = 120
+        elseif v258 == 2 then
+            n5 = 45
+        elseif v258 == 1 then
+            n5 = 18
+        end
+
+        if n5 > tick() - v257 then
+            return false
+        end
+    end
+
+    if p32.rank >= (t1.value10.rarityLadder.Secret or 8) then
+        return true
+    end
+
+    if t1.value13.areaWantedCount > 0 and not t1.value13.areaWanted[p32.area] then
+        return false
+    end
+
+    if t1.value13.rarityWantedCount > 0 and not t1.value13.rarityWanted[p32.rarity] then
+        return false
+    end
+
+    return true
+end
+local function v28()
+    local v260 = t1.value21()
+    if not v260 then
+        return nil
+    end
+    t1.value49(false)
+    local Position = v260.Position
+    local v262
+    local v263
+    for i = 1, #t1.value11.eggList do
+        local v265 = t1.value11.eggList[i]
+
+        if t1.value50(v265) then
+            local Magnitude = (v265.pos - Position).Magnitude
+            local v267 = v265.tier > 0 and v265.tier or v265.rank
+            local v268 = v265.rank * 1000000000000 + v267 * 100000000 + (not v265.mutated and 0 or 1000000) - math.min(Magnitude, 100000)
+
+            if not v263 or v263 < v268 then
+                v263 = v268
+                v262 = v265
+            end
+        end
+    end
+
+    return v262
+end
+t1.value11.travelling = false
+t1.value11.travelToken = 0
+local function v29(p33, p34)
+    pcall(function()
+        p33.AssemblyLinearVelocity = Vector3.zero
+        p33.AssemblyAngularVelocity = Vector3.zero
+    end)
+
+    if p34 then
+        pcall(function()
+            p34:ChangeState(Enum.HumanoidStateType.Physics)
+        end)
+    end
+end
+function t1.value51()
+    local v269 = t1.value21()
+    local v270 = t1.value22()
+
+    if v269 then
+        pcall(function()
+            v269.AssemblyLinearVelocity = Vector3.zero
+            v269.AssemblyAngularVelocity = Vector3.zero
+        end)
+    end
+
+    if v270 then
+        pcall(function()
+            v270:ChangeState(Enum.HumanoidStateType.GettingUp)
+        end)
+        pcall(function()
+            v270:ChangeState(Enum.HumanoidStateType.Landed)
+        end)
+    end
+end
+t1.value10.TRAP_RADIUS = 16
+t1.value10.TRAP_WORDS = {
+	"trap",
+	"cage",
+	"snare"
+}
+t1.value11.trapList = {}
+t1.value11.trapModels = {}
+t1.value11.trapAt = 0
+function t1.value52()
+    local t10 = {}
+    local t11 = {}
+    local __DEBRIS = t1.value7:FindFirstChild("__DEBRIS")
+
+    for _, v in ipairs({
+		__DEBRIS,
+		t1.value7
+	}) do
+        if v then
+            for _, child in ipairs(v:GetChildren()) do
+                if (function(p35)
+                    if not p35:IsA("Model") then
+                        return false
+                    end
+
+                    if p35:FindFirstChild("UnplacePrompt") then
+                        return true
+                    end
+
+                    local v1030 = p35.Name:lower()
+
+                    for _, v8 in ipairs(t1.value10.TRAP_WORDS) do
+                        if v1030:find(v8, 1, true) then
+                            return true
+                        end
+                    end
+
+                    return false
+                end)(child) then
+                    local v280 = (function(p36)
+                        local u1034 = p36
+                        local ok2, result2 = pcall(function()
+                            return u1034:GetPivot()
+                        end)
+                        if ok2 and result2 then
+                            return result2.Position
+                        end
+                        local BasePart = u1034:FindFirstChildWhichIsA("BasePart")
+
+                        return BasePart and BasePart.Position or nil
+                    end)(child)
+
+                    if v280 then
+                        t11[#t11 + 1] = v280
+                        t10[#t10 + 1] = child
+
+                        if t1.value14.AntiTrap then
+                            (function(p37)
+                                for _, descendant in ipairs(p37:GetDescendants()) do
+                                    local v1041 = descendant
+
+                                    if v1041:IsA("BasePart") then
+                                        pcall(function()
+                                            v1041.CanTouch = false
+                                        end)
+                                        pcall(function()
+                                            v1041.CanCollide = false
+                                        end)
+                                    end
+                                end
+                            end)(child)
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    t1.value11.trapList = t11
+    t1.value11.trapModels = t10
+    t1.value11.trapAt = tick()
+
+    return t11
+end
+function t1.value53()
+    if tick() - t1.value11.trapAt > 2 then
+        t1.value52()
+    end
+
+    return t1.value11.trapList
+end
+function t1.value54(p38, p39, p40)
+    if not t1.value14.AntiTrap then
+        return false
+    end
+
+    local v284 = t1.value53()
+    local v285 = p40 or t1.value10.TRAP_RADIUS
+    local v286 = v285 * v285
+
+    for i = 1, #v284 do
+        local v288 = v284[i]
+        local v289 = v288.X - p38
+        local v290 = v288.Z - p39
+
+        if v286 > v289 * v289 + v290 * v290 then
+            return true
+        end
+    end
+
+    return false
+end
+function t1.value55()
+    local Character = t1.value9.Character
+    if not Character then
+        return
+    end
+    for v294, v295 in ipairs(Character:GetDescendants()) do
+
+        local v296 = v295
+
+        if v296:IsA("BasePart") then
+            if v296.Anchored then
+                pcall(function()
+                    v296.Anchored = false
+                end)
+            end
+        elseif v296:IsA("WeldConstraint") or v296:IsA("Weld") then
+            pcall(function()
+                local Part0 = v296.Part0
+                local Part1 = v296.Part1
+                local v1044 = Part0 and not Part0:IsDescendantOf(Character)
+
+                if not v1044 then
+                    if Part1 then
+                        Part1 = not Part1:IsDescendantOf(Character)
+                    end
+
+                    v1044 = Part1
+                end
+
+                if v1044 then
+                    v296:Destroy()
+                end
+            end)
+        end
+    end
+    local v297 = t1.value22()
+    if v297 then
+        pcall(function()
+            v297:ChangeState(Enum.HumanoidStateType.GettingUp)
+        end)
+        pcall(function()
+            v297:ChangeState(Enum.HumanoidStateType.Physics)
+        end)
+    end
+end
+t1.value11.groundParams = RaycastParams.new()
+t1.value11.groundParams.FilterType = Enum.RaycastFilterType.Exclude
+t1.value11.groundParams.IgnoreWater = true
+function t1.value56()
+    local t12 = {}
+
+    if t1.value9.Character then
+        t12[#t12 + 1] = t1.value9.Character
+    end
+
+    for _, player in ipairs(t1.value2:GetPlayers()) do
+        if player ~= t1.value9 and player.Character then
+            t12[#t12 + 1] = player.Character
+        end
+    end
+
+    local v301 = t1.value45()
+
+    if v301 then
+        t12[#t12 + 1] = v301
+    end
+
+    for _, v in ipairs(t1.value11.trapModels) do
+        if v.Parent then
+            t12[#t12 + 1] = v
+        end
+    end
+
+    return t12
+end
+function t1.value57()
+    t1.value11.groundParams.FilterDescendantsInstances = t1.value56()
+end
+t1.value10.PROBE_LOW = 7
+t1.value10.PROBE_HIGH = 160
+t1.value10.PROBE_DOWN = 420
+t1.value10.STEP_MAX = 6
+t1.value10.TRAVEL_SPEED = 1000
+local function v30(p41)
+    for _ = 1, 6 do
+        if not p41 or p41 == t1.value7 then
+            return false
+        end
+
+        if p41:IsA("Model") and p41:FindFirstChildWhichIsA("Humanoid") or p41:FindFirstChildWhichIsA("AnimationController") then
+            return true
+        end
+
+        p41 = p41.Parent
+    end
+
+    return false
+end
+t1.value58 = nil
+function t1.value58(p42, p43, p44, p45)
+    local v315 = p44
+
+    for _ = 1, 4 do
+        local raycastResult = t1.value7:Raycast(Vector3.new(p42, v315, p43), Vector3.new(0, -(v315 - (p44 - p45)), 0), t1.value11.groundParams)
+
+        if not raycastResult then
+            return nil
+        end
+
+        if not v30(raycastResult.Instance) then
+            return raycastResult.Position.Y
+        end
+
+        v315 = raycastResult.Position.Y - 0.6
+
+        if v315 <= p44 - p45 then
+            return nil
+        end
+    end
+
+    return nil
+end
+function t1.value59(p46, p47, p48)
+    local v309 = t1.value58(p46, p47, p48 + t1.value10.PROBE_LOW, t1.value10.PROBE_LOW + t1.value10.PROBE_DOWN)
+
+    if v309 then
+        return v309
+    end
+
+    local v310 = t1.value58(p46, p47, p48 + t1.value10.PROBE_HIGH, t1.value10.PROBE_HIGH + t1.value10.PROBE_DOWN)
+
+    if v310 and v310 > p48 + t1.value10.PROBE_LOW then
+        return v310
+    end
+
+    return nil
+end
+function t1.value60()
+    local v318 = t1.value21()
+    local v319 = t1.value22()
+    local v320 = v318 and v318.Size.Y * 0.5 or 1
+    local n6 = 2
+
+    if v319 then
+        local ok3, result3 = pcall(function()
+            return v319.HipHeight
+        end)
+
+        if ok3 then
+            ok3 = type(result3) == "number" and result3 > 0
+        end
+
+        if ok3 then
+            n6 = result3
+        end
+    end
+
+    return v320 + n6
+end
+t1.value11.PathService = game:GetService("PathfindingService")
+t1.value10.ROUTE_SAMPLE = 14
+t1.value10.ROUTE_DROP = 26
+t1.value61 = nil
+function t1.value61(p49, p50, p51)
+    local vector3 = Vector3.new(p50.X - p49.X, 0, p50.Z - p49.Z)
+    local Magnitude = vector3.Magnitude
+
+    if Magnitude < 1 then
+        return true, p51
+    end
+
+    local Unit = vector3.Unit
+    local v330 = math.ceil(Magnitude / t1.value10.ROUTE_SAMPLE)
+    local v331 = false
+    local n7 = 0
+
+    while true do
+        n7 += 1
+
+        if (not v331 or not (v330 <= n7)) and (v331 or not (n7 <= v330)) then
+            break
+        end
+
+        local v333 = p49 + Unit * math.min(Magnitude, n7 * t1.value10.ROUTE_SAMPLE)
+
+        if t1.value54(v333.X, v333.Z) then
+            return false, p51
+        end
+
+        local v334 = t1.value59(v333.X, v333.Z, p51)
+
+        if not v334 or math.abs(v334 - p51) > t1.value10.ROUTE_DROP then
+            return false, p51
+        end
+
+        p51 = v334
+    end
+
+    return true, p51
+end
+function t1.value62(p52, p53)
+    local v337 = t1.value59(p52.X, p52.Z, p52.Y)
+
+    if not v337 then
+        return false
+    end
+
+    for i = 1, #p53 do
+        local v339 = i
+        local t13, t13Result = t1.value61(p52, p53[v339], v337)
+        v337 = t13Result
+        if not t13 then
+            return false
+        end
+        p52 = p53[v339]
+    end
+
+    return true
+end
+local value11 = t1.value11
+local value11_2 = t1.value11
+value11.hubCache = nil
+value11_2.hubTried = false
+t1.value63 = nil
+function t1.value63(p54, p55)
+    if not p54 then
+        return nil
+    end
+    local zero = Vector3.zero
+    local n8 = 0
+    local v345, v346, v347 = ipairs(p54:GetDescendants())
+    local g349
+    repeat
+        local v348
+
+        repeat
+            v347, v348 = v345(v346, v347)
+
+            if not v347 then
+                g349 = true
+            end
+
+            if g349 then
+                break
+            end
+        until v348:IsA("BasePart")
+
+        if g349 then
+            break
+        end
+
+        zero += v348.Position
+        n8 += 1
+    until p55 <= n8
+    g349 = false
+    if n8 == 0 then
+        return nil
+    end
+
+    return zero / n8
+end
+function t1.value64()
+    if t1.value11.hubCache or t1.value11.hubTried then
+        return t1.value11.hubCache
+    end
+
+    t1.value11.hubTried = true
+
+    local v361 = t1.value63(t1.value7:FindFirstChild("Stands"), 60)
+
+    if not v361 then
+        local Plots = t1.value7:FindFirstChild("Plots")
+
+        if Plots then
+            local zero = Vector3.zero
+            local n9 = 0
+            local GetChildren = Plots.GetChildren
+
+            for _, v in ipairs(GetChildren(Plots)) do
+                if v:IsA("Model") then
+                    local ok4, result4 = pcall(function()
+                        return v:GetPivot()
+                    end)
+
+                    if ok4 and result4 then
+                        zero += result4.Position
+                        n9 += 1
+                    end
+                end
+            end
+
+            if n9 > 0 then
+                v361 = zero / n9
+            end
+        end
+    end
+
+    if v361 then
+        local v370 = t1.value59(v361.X, v361.Z, v361.Y) or t1.value59(v361.X, v361.Z, v361.Y + 200)
+
+        if v370 then
+            t1.value11.hubCache = Vector3.new(v361.X, v370, v361.Z)
+        end
+    end
+
+    return t1.value11.hubCache
+end
+function t1.value65(p56)
+    local t14 = {}
+
+    for i = 1, #p56 do
+        local v353 = p56[i]
+        local v354 = t14[#t14]
+
+        if not v354 or Vector3.new(v353.X - v354.X, 0, v353.Z - v354.Z).Magnitude > 3 then
+            t14[#t14 + 1] = v353
+        end
+    end
+
+    if #t14 < 3 then
+        return t14
+    end
+
+    local t15 = {}
+
+    for i = 2, #t14 - 1 do
+        local v357 = i
+        local vector3 = Vector3.new(t14[v357].X - t14[v357 - 1].X, 0, t14[v357].Z - t14[v357 - 1].Z)
+        local vector3_2 = Vector3.new(t14[v357 + 1].X - t14[v357].X, 0, t14[v357 + 1].Z - t14[v357].Z)
+        local v360 = vector3.Magnitude > 0.1
+
+        if v360 then
+            v360 = vector3_2.Magnitude > 0.1
+
+            if v360 then
+                v360 = vector3.Unit:Dot(vector3_2.Unit) < 0.995
+            end
+        end
+
+        if v360 then
+            t15[#t15 + 1] = t14[v357]
+        end
+    end
+
+    t15[#t15 + 1] = t14[#t14]
+
+    return t15
+end
+function t1.value66(p57, p58)
+    local ok5, result5 = pcall(function()
+        return t1.value11.PathService:CreatePath({
+			AgentRadius = 3,
+			AgentHeight = 6,
+			AgentCanJump = true,
+			AgentCanClimb = false,
+			WaypointSpacing = 24
+		})
+    end)
+    local v375 = result5
+    if not ok5 or not v375 then
+        return nil
+    end
+    local ok6 = pcall(function()
+        v375:ComputeAsync(p57, p58)
+    end)
+    t1.value11.travelStep = tick()
+    local Status
+    local Waypoints
+    pcall(function()
+        Status = v375.Status
+    end)
+    if ok6 and Status == Enum.PathStatus.Success then
+        pcall(function()
+            Waypoints = v375:GetWaypoints()
+        end)
+    end
+    pcall(function()
+        v375:Destroy()
+    end)
+    if type(Waypoints) ~= "table" or #Waypoints < 2 then
+        return nil
+    end
+    local t16 = {}
+    for i = 2, #Waypoints do
+        t16[#t16 + 1] = Waypoints[i].Position
+    end
+    t16[#t16] = p58
+
+    return t1.value65(t16)
+end
+t1.value10.SIDE_OFFSETS = {
+	30,
+	-30,
+	70,
+	-70,
+	140,
+	-140,
+	240,
+	-240
+}
+t1.value10.STRAIGHT_MAX = 60
+t1.value67 = nil
+function t1.value67(p59, p60, p61)
+    if t1.value62(p59, {
+		p61,
+		p60
+	}) then
+        return {
+			p61,
+			p60
+		}
+    end
+
+    local vector3 = Vector3.new(p61.X - p59.X, 0, p61.Z - p59.Z)
+
+    if vector3.Magnitude > 1 then
+        local vector3_3 = Vector3.new(-vector3.Unit.Z, 0, vector3.Unit.X)
+
+        for i = 1, #t1.value10.SIDE_OFFSETS do
+            local v416 = p61 + vector3_3 * t1.value10.SIDE_OFFSETS[i]
+            local v417 = t1.value59(v416.X, v416.Z, p61.Y)
+
+            if not v417 then
+                continue
+            end
+
+            local vector3_4 = Vector3.new(v416.X, v417, v416.Z)
+
+            if t1.value62(p59, {
+				vector3_4,
+				p60
+			}) then
+                return {
+					vector3_4,
+					p60
+				}
+            end
+        end
+    end
+
+    return nil
+end
+function t1.value68(p62, p63)
+    local v421 = Vector3.new(p63.X - p62.X, 0, p63.Z - p62.Z).Magnitude <= t1.value10.STRAIGHT_MAX
+
+    if v421 then
+        v421 = t1.value62(p62, { p63 })
+    end
+
+    if v421 then
+        return { p63 }
+    end
+
+    local v422 = t1.value64()
+
+    if v422 then
+        local v423 = t1.value67(p62, p63, v422)
+
+        if v423 then
+            return v423
+        end
+    end
+
+    local vector3 = Vector3.new(p63.X - p62.X, 0, p63.Z - p62.Z)
+
+    if vector3.Magnitude > 1 then
+        local Unit = vector3.Unit
+        local vector3_5 = Vector3.new(-Unit.Z, 0, Unit.X)
+        local v427 = p62 + vector3 * 0.5
+
+        for i = 1, #t1.value10.SIDE_OFFSETS do
+            local v429 = v427 + vector3_5 * t1.value10.SIDE_OFFSETS[i]
+            local v430 = t1.value59(v429.X, v429.Z, v427.Y)
+
+            if not v430 then
+                continue
+            end
+
+            local vector3_6 = Vector3.new(v429.X, v430, v429.Z)
+
+            if t1.value62(p62, {
+				vector3_6,
+				p63
+			}) then
+                return {
+					vector3_6,
+					p63
+				}
+            end
+        end
+    end
+
+    local v432 = t1.value66(p62, p63)
+
+    if v432 and #v432 > 0 then
+        return v432
+    end
+
+    if v422 then
+        return {
+			v422,
+			p63
+		}
+    end
+
+    return { p63 }
+end
+function t1.value69(p64, p65, p66, p67)
+    local v385 = t1.value21()
+
+    if not v385 then
+        return false
+    end
+
+    local Position = v385.Position
+    local vector3 = Vector3.new(p64.X - Position.X, 0, p64.Z - Position.Z)
+    local Magnitude = vector3.Magnitude
+
+    if Magnitude <= 0.5 then
+        return true
+    end
+
+    local Unit = vector3.Unit
+    local Rotation = CFrame.lookAt(Vector3.zero, Unit).Rotation
+    local v391 = t1.value60()
+    local u392 = (t1.value59(Position.X, Position.Z, Position.Y - v391) or Position.Y - v391) + v391
+    local n10 = 0
+    local v394 = Position
+    local v395 = tick() + Magnitude / t1.value10.TRAVEL_SPEED + 10
+    local v396 = false
+    local timestamp = tick()
+
+    while t1.value17() and p67 == t1.value11.travelToken and (not p66 or p66()) do
+        local dt = t1.value3.Heartbeat:Wait()
+        t1.value11.travelStep = tick()
+        local v399 = t1.value21()
+        local v400 = t1.value22()
+        local v401 = v399
+        if not v401 or (not v401.Parent or (not v400 or v400.Health <= 0)) then
+            break
+        end
+        if (v401.Position - v394).Magnitude > 2 then
+            v394 = v401.Position
+            timestamp = tick()
+        elseif tick() - timestamp > 0.5 then
+            timestamp = tick()
+            t1.value55()
+        end
+        if v395 < tick() then
+            break
+        end
+        local v402 = math.min(t1.value10.TRAVEL_SPEED * math.min(dt, 0.1), Magnitude - n10)
+        local v403 = math.max(1, (math.ceil(v402 / t1.value10.STEP_MAX)))
+        local v404 = v402 / v403
+        for _ = 1, v403 do
+            n10 = math.min(Magnitude, n10 + v404)
+
+            local v406 = Position + Unit * n10
+            local v407 = t1.value59(v406.X, v406.Z, u392 - v391)
+
+            if v407 then
+                u392 += math.clamp(v407 + v391 - u392, -t1.value10.STEP_MAX * 4, t1.value10.STEP_MAX * 4)
+            end
+
+            if Magnitude <= n10 then
+                break
+            end
+        end
+        local u408 = Position + Unit * n10
+        pcall(function()
+            v401.CFrame = CFrame.new(u408.X, u392, u408.Z) * Rotation
+        end)
+        v29(v401, v400)
+        if n10 >= Magnitude - 0.01 then
+            v396 = true
+
+            break
+        end
+    end
+
+    if p67 ~= t1.value11.travelToken then
+        return false
+    end
+
+    if v396 then
+        return true
+    end
+
+    local v409 = t1.value21()
+
+    if not v409 then
+        return false
+    end
+
+    return Vector3.new(p64.X - v409.Position.X, 0, p64.Z - v409.Position.Z).Magnitude <= (p65 or 8)
+end
+t1.value10.TP_STEP = 45
+t1.value10.TP_WAIT = 0.08
+function t1.value70(p68, p69, p70, p71)
+    local v437 = t1.value21()
+
+    if not v437 then
+        return false
+    end
+
+    local Position = v437.Position
+    local vector3 = Vector3.new(p68.X - Position.X, 0, p68.Z - Position.Z)
+    local Magnitude = vector3.Magnitude
+
+    if Magnitude <= 0.5 then
+        return true
+    end
+
+    local Unit = vector3.Unit
+    local Rotation = CFrame.lookAt(Vector3.zero, Unit).Rotation
+    local v443 = t1.value60()
+    local u444 = (t1.value59(Position.X, Position.Z, Position.Y - v443) or Position.Y - v443) + v443
+    local n11 = 0
+    local v446 = math.ceil(Magnitude / t1.value10.TP_STEP)
+    local v447 = Position
+    local v448 = tick() + v446 * (t1.value10.TP_WAIT + 0.06) + 10
+    local timestamp = tick()
+
+    while t1.value17() and p71 == t1.value11.travelToken and (not p70 or p70()) do
+        local v450 = t1.value21()
+        local v451 = t1.value22()
+        local v452 = v450
+
+        if not v452 or (not v452.Parent or (not v451 or v451.Health <= 0)) or v448 < tick() then
+            break
+        end
+
+        if (v452.Position - v447).Magnitude > 2 then
+            v447 = v452.Position
+            timestamp = tick()
+        elseif tick() - timestamp > 0.5 then
+            timestamp = tick()
+            t1.value55()
+        end
+
+        n11 = math.min(Magnitude, n11 + t1.value10.TP_STEP)
+
+        local v453 = Position + Unit * n11
+        local v454 = t1.value59(v453.X, v453.Z, u444 - v443)
+
+        if v454 then
+            u444 = v454 + v443
+        end
+
+        pcall(function()
+            v452.CFrame = CFrame.new(v453.X, u444, v453.Z) * Rotation
+        end)
+        v29(v452, v451)
+        t1.value11.travelStep = tick()
+
+        if n11 >= Magnitude - 0.01 then
+            return true
+        end
+
+        task.wait(t1.value10.TP_WAIT)
+    end
+
+    if p71 ~= t1.value11.travelToken then
+        return false
+    end
+
+    local v455 = t1.value21()
+
+    if not v455 then
+        return false
+    end
+
+    return Vector3.new(p68.X - v455.Position.X, 0, p68.Z - v455.Position.Z).Magnitude <= (p69 or 8)
+end
+function t1.value71(p72, p73, p74)
+    local v459 = t1.value21()
+
+    if not v459 or not p72 then
+        return false
+    end
+
+    local v460 = p73 or 8
+
+    if v460 >= Vector3.new(p72.X - v459.Position.X, 0, p72.Z - v459.Position.Z).Magnitude then
+        return true
+    end
+
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+    t1.value57()
+    t1.value52()
+
+    local travelToken = t1.value11.travelToken
+
+    t1.value11.travelStep = tick()
+    t1.value11.travelling = true
+
+    local v462 = t1.value14.FarmMethod == "TP Walk" and t1.value70 or t1.value69
+    local v463 = t1.value68(v459.Position, p72)
+    local v464 = true
+
+    for i = 1, #v463 do
+        if not v462(v463[i], i == #v463 and v460 or 4, p74, travelToken) then
+            v464 = false
+
+            break
+        end
+    end
+
+    if travelToken ~= t1.value11.travelToken then
+        return false
+    end
+
+    t1.value11.travelling = false
+    t1.value51()
+
+    local v466 = t1.value21()
+
+    if not v466 then
+        return false
+    end
+
+    return v464 and Vector3.new(p72.X - v466.Position.X, 0, p72.Z - v466.Position.Z).Magnitude <= v460 + 6
+end
+t1.value11.travelStep = 0
+v5(t1.value3.Heartbeat:Connect(function()
+    if t1.value11.travelling and tick() - t1.value11.travelStep > 6 then
+        t1.value11.travelling = false
+        t1.value51()
+    end
+end))
+v5(t1.value9.CharacterAdded:Connect(function()
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+    t1.value11.travelStep = 0
+    t1.value11.carryingUid = nil
+    t1.value11.deliverFails = 0
+    t1.value11.penCache = nil
+end))
+
+local __DEBRIS = t1.value7:FindFirstChild("__DEBRIS")
+
+if __DEBRIS then
+    v5(__DEBRIS.ChildAdded:Connect(function()
+        task.delay(0.1, function()
+            if t1.value17() and t1.value14.AntiTrap then
+                pcall(t1.value52)
+            end
+        end)
+    end))
+end
+v4(function()
+    while t1.value17() do
+        if t1.value14.AntiTrap then
+            pcall(t1.value52)
+        end
+
+        task.wait(3)
+    end
+end)
+t1.value11.voidBusy = false
+function t1.value72(p75)
+    if not t1.value23() then
+        return false
+    end
+
+    local v468 = t1.value21()
+
+    return v468 ~= nil and (v468.Parent ~= nil and p75 < v468.Position.Y)
+end
+function t1.value73()
+    if t1.value11.voidBusy then
+        return false
+    end
+
+    local v473 = t1.value21()
+
+    if not v473 then
+        return false
+    end
+
+    t1.value11.voidBusy = true
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+
+    local n12 = -500
+    local ok7, result6 = pcall(function()
+        return t1.value7.FallenPartsDestroyHeight
+    end)
+
+    if ok7 then
+        ok7 = type(result6) == "number"
+    end
+
+    if ok7 then
+        n12 = result6
+    end
+
+    local v477 = n12 + 60
+    local Position = v473.Position
+    local v479 = t1.value22()
+
+    if v479 then
+        pcall(function()
+            v479:ChangeState(Enum.HumanoidStateType.Physics)
+        end)
+    end
+
+    local v480 = tick() + 5
+
+    while t1.value17() and v480 > tick() do
+        local v481 = t1.value21()
+
+        if not v481 or not v481.Parent then
+            break
+        end
+
+        pcall(function()
+            v481.CFrame = CFrame.new(Position.X, v477, Position.Z)
+            v481.AssemblyLinearVelocity = Vector3.zero
+            v481.AssemblyAngularVelocity = Vector3.zero
+        end)
+        t1.value3.Heartbeat:Wait()
+    end
+
+    local v482 = t1.value21()
+
+    if v482 and v482.Parent then
+        pcall(function()
+            v482.CFrame = CFrame.new(Position.X, n12 - 250, Position.Z)
+            v482.AssemblyLinearVelocity = Vector3.new(0, -280, 0)
+        end)
+    end
+
+    local v483 = n12 + 200
+    local v484 = tick() + 20
+    local v485 = false
+
+    while t1.value17() and v484 > tick() do
+        if t1.value72(v483) then
+            v485 = true
+
+            break
+        end
+
+        task.wait(0.2)
+    end
+
+    if not v485 and t1.value17() then
+        t1.value20("Using Fallback..", 5)
+        t1.value27(t1.value25.RigWipe)
+
+        local v486 = tick() + 12
+
+        while t1.value17() and v486 > tick() do
+            if t1.value72(v483) then
+                v485 = true
+
+                break
+            end
+
+            task.wait(0.2)
+        end
+    end
+
+    t1.value11.voidBusy = false
+
+    return v485
+end
+function t1.value74(p76)
+    local Stands = t1.value7:FindFirstChild("Stands")
+    local v471 = Stands and Stands:FindFirstChild("Prompts")
+    local v472 = v471 and v471:FindFirstChild(p76)
+
+    return v472 and v472:FindFirstChildWhichIsA("ProximityPrompt") or nil
+end
+local function v34()
+    local v489 = t1.value74("SellAll") or t1.value74("Sell")
+    local v490 = v489 and v489.Parent
+
+    if v490 and v490:IsA("BasePart") then
+        return v490.CFrame * CFrame.new(0, 0, 3)
+    end
+
+    return nil
+end
+local value11_3 = t1.value11
+local value11_4 = t1.value11
+value11_3.cachedSlot = nil
+value11_4.cachedPlot = nil
+t1.value11.plotTried = 0
+function t1.value75()
+    if t1.value11.cachedPlot and t1.value11.cachedPlot.Parent then
+        return t1.value11.cachedPlot
+    end
+
+    local Plots = t1.value7:FindFirstChild("Plots")
+
+    if not Plots then
+        return nil
+    end
+
+    if not t1.value11.cachedSlot then
+        local v492 = t1.value27(t1.value25.PlotState)
+
+        if type(v492) == "table" then
+            local v493 = v492.OwnersBySlot or (v492.SlotOwners or (v492.Owners or v492.Slots))
+
+            if type(v493) == "table" then
+                for k, v in pairs(v493) do
+                    local v496 = v
+
+                    if type(v) == "table" then
+                        v496 = v.UserId or (v.OwnerUserId or (v.Id or v.Name))
+                    end
+
+                    if v496 == t1.value9.UserId or (v496 == tostring(t1.value9.UserId) or v496 == t1.value9.Name) then
+                        t1.value11.cachedSlot = k
+
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    if t1.value11.cachedSlot then
+        local value11_5 = t1.value11
+        local t17 = { tostring(t1.value11.cachedSlot) }
+
+        value11_5.cachedPlot = Plots:FindFirstChild(v2(t17))
+
+        if t1.value11.cachedPlot then
+            return t1.value11.cachedPlot
+        end
+    end
+
+    if tick() - t1.value11.plotTried < 10 then
+        return nil
+    end
+
+    local value11_6 = t1.value11
+    local GetChildren = Plots.GetChildren
+
+    value11_6.plotTried = tick()
+
+    for _, v in ipairs(GetChildren(Plots)) do
+        for _, descendant in ipairs(v:GetDescendants()) do
+            local v505 = descendant
+
+            if v505:IsA("TextLabel") or v505:IsA("TextButton") then
+                local ok8, result7 = pcall(function()
+                    return v505.Text
+                end)
+
+                if ok8 then
+                    ok8 = type(result7) == "string"
+
+                    if ok8 then
+                        ok8 = #result7 > 0
+
+                        if ok8 then
+                            ok8 = result7:find(t1.value9.Name, 1, true)
+                        end
+                    end
+                end
+
+                if ok8 then
+                    t1.value11.cachedPlot = v
+
+                    return v
+                end
+            end
+        end
+    end
+
+    return nil
+end
+local function v37()
+    local v508 = t1.value75()
+
+    if not v508 then
+        return nil
+    end
+
+    local ok9, result8 = pcall(function()
+        return v508:GetPivot()
+    end)
+
+    return ok9 and result8 or nil
+end
+t1.value11.penCache = nil
+function t1.value76()
+    if t1.value11.penCache then
+        return t1.value11.penCache
+    end
+
+    local v511 = t1.value75()
+
+    if v511 then
+        local GetDescendants = v511.GetDescendants
+
+        for _, v in ipairs(GetDescendants(v511)) do
+            local v515 = v
+
+            if v515.Name:lower():find("pen", 1, true) then
+                if v515:IsA("BasePart") then
+                    t1.value11.penCache = v515.CFrame
+
+                    return t1.value11.penCache
+                end
+
+                if v515:IsA("Model") then
+                    local ok10, result9 = pcall(function()
+                        return v515:GetPivot()
+                    end)
+
+                    if ok10 and result9 then
+                        t1.value11.penCache = result9
+
+                        return t1.value11.penCache
+                    end
+                end
+            end
+        end
+    end
+
+    local v518 = t1.value75()
+    local v519
+
+    if not v518 then
+        v519 = nil
+    else
+        local ok11, result10 = pcall(function()
+            return v518:GetPivot()
+        end)
+
+        v519 = ok11 and result10 or nil
+    end
+
+    if v519 then
+        t1.value11.penCache = v519 * CFrame.new(0, 0, 15)
+
+        return t1.value11.penCache
+    end
+
+    return nil
+end
+function t1.value77(p77)
+    local v523 = p77.OwnerUserId or (p77.UserId or (p77.PlayerId or p77.Owner))
+
+    if type(v523) == "table" then
+        v523 = v523.UserId or (v523.userId or v523.Id)
+    end
+
+    return v523
+end
+t1.value78 = nil
+function t1.value78(p78)
+    local v525 = t1.value77(p78)
+
+    if type(v525) == "number" then
+        return v525 == t1.value9.UserId
+    end
+
+    if type(v525) == "string" then
+        return v525 == tostring(t1.value9.UserId) or v525 == t1.value9.Name
+    end
+
+    return nil
+end
+t1.value79 = nil
+function t1.value79()
+    local t18 = {}
+    local t19 = {}
+    local v528 = t1.value27(t1.value25.EggLive)
+    if type(v528) ~= "table" then
+        return t18
+    end
+    local function v529(p79)
+        for k, v in pairs(p79) do
+            local v1048 = k
+
+            if type(v) == "table" then
+                local v1049 = v.Uid or (type(v1048) == "string" and v1048 or nil)
+
+                if v1049 and (not t19[v1049] and t1.value78(v) ~= false) then
+                    t19[v1049] = true
+
+                    if v.Uid == nil then
+                        v.Uid = v1049
+                    end
+
+                    t18[#t18 + 1] = v
+                end
+            end
+        end
+    end
+    for v532, v533 in pairs(v528) do
+
+        if type(v533) == "table" and (t1.value78(v533) == true and type(v533.Records) == "table") then
+            v529(v533.Records)
+        end
+    end
+    if #t18 == 0 then
+        for _, v in pairs(v528) do
+            if type(v) == "table" and type(v.Records) == "table" then
+                v529(v.Records)
+            end
+        end
+    end
+    if #t18 == 0 and type(v528.Records) == "table" then
+        v529(v528.Records)
+    end
+
+    return t18
+end
+function t1.value80()
+    local t20 = {
+		l = {},
+		w = {}
+	}
+    for v539, v540 in ipairs(t1.value79()) do
+
+        local Placement = v540.Placement
+        local v542 = Placement and Placement.LocalCFrame or (Placement.CFrame or Placement.WorldCFrame)
+
+        if typeof(v542) == "CFrame" then
+            t20.l[#t20.l + 1] = v542.Position
+        elseif typeof(v542) == "Vector3" then
+            t20.l[#t20.l + 1] = v542
+        end
+    end
+    for _, child in ipairs(t1.value7:GetChildren()) do
+        if child.Name == "PlacedEggRenders" then
+            for _, child2 in ipairs(child:GetChildren()) do
+                local v547 = child2
+                local ok12, result11 = pcall(function()
+                    if v547:IsA("BasePart") then
+                        return v547.Position
+                    end
+
+                    if v547:IsA("Model") then
+                        return v547:GetPivot().Position
+                    end
+
+                    return nil
+                end)
+
+                if ok12 and result11 then
+                    t20.w[#t20.w + 1] = result11
+                end
+            end
+        end
+    end
+
+    return t20
+end
+t1.value11.originCache = nil
+t1.value11.originAt = 0
+function t1.value81()
+    if t1.value11.originCache and tick() - t1.value11.originAt < 15 then
+        return t1.value11.originCache
+    end
+
+    local t21 = {}
+    local v551 = t1.value75()
+
+    if v551 then
+        local ok13, result12 = pcall(function()
+            return v551.PrimaryPart
+        end)
+        if ok13 and result12 then
+            t21[#t21 + 1] = result12.CFrame
+        end
+        local v554
+        local n13 = 0
+        for v558, v559 in ipairs(v551:GetChildren()) do
+
+            if v559:IsA("BasePart") then
+                local v560 = v559.Name:lower()
+                local v561 = v560:find("base", 1, true)
+
+                if not v561 then
+                    v561 = v560:find("plate", 1, true)
+
+                    if not v561 then
+                        v561 = v560:find("pad", 1, true) or (v560:find("floor", 1, true) or (v560:find("ground", 1, true) or v560:find("origin", 1, true)))
+                    end
+                end
+
+                if v561 then
+                    local v562 = v559.Size.X * v559.Size.Z
+
+                    if n13 < v562 then
+                        v554 = v559
+                        n13 = v562
+                    end
+                end
+            end
+        end
+        if v554 then
+            t21[#t21 + 1] = v554.CFrame
+        end
+        local ok14, result13 = pcall(function()
+            return v551:GetPivot()
+        end)
+        if ok14 and result13 then
+            t21[#t21 + 1] = result13
+        end
+    end
+
+    if #t21 == 0 then
+        t21[1] = CFrame.new()
+    end
+
+    local t22 = {}
+
+    for _, v in ipairs(t21) do
+        local v568 = true
+
+        for _, v9 in ipairs(t22) do
+            if (v9.Position - v.Position).Magnitude < 0.5 then
+                v568 = false
+
+                break
+            end
+        end
+
+        if v568 then
+            t22[#t22 + 1] = v
+        end
+    end
+
+    t1.value11.originCache = t22
+    t1.value11.originAt = tick()
+
+    return t22
+end
+t1.value10.RING8 = {
+	{
+		1,
+		0
+	},
+	{
+		-1,
+		0
+	},
+	{
+		0,
+		1
+	},
+	{
+		0,
+		-1
+	},
+	{
+		1,
+		1
+	},
+	{
+		1,
+		-1
+	},
+	{
+		-1,
+		1
+	},
+	{
+		-1,
+		-1
+	}
+}
+t1.value10.PLACE_PITCH = 6
+t1.value10.PLACE_HALF = 24
+t1.value10.EGG_CLEAR = 7
+t1.value10.ZONE_HALF = 20
+t1.value10.GRID_STEP = 4
+t1.value11.claimedCells = {}
+function t1.value82()
+    local v572 = t1.value81()[1]
+
+    if not v572 then
+        return {}
+    end
+
+    local w = t1.value80().w
+    local t23 = {}
+    local t24 = {}
+    local v576 = t1.value10.EGG_CLEAR * t1.value10.EGG_CLEAR
+
+    local function v577(p80, p81)
+        local n14 = 1e999
+
+        for _, v in ipairs(w) do
+            local v1055 = v.X - p80
+            local v1056 = v.Z - p81
+            local v1057 = v1056 * v1056
+            local v1058 = v1055 * v1055 + v1057
+
+            if v1058 < n14 then
+                n14 = v1058
+            end
+        end
+
+        return n14
+    end
+
+    local ZONE_HALF = t1.value10.ZONE_HALF
+    local GRID_STEP = t1.value10.GRID_STEP
+    local v580 = -ZONE_HALF
+
+    while v580 <= ZONE_HALF do
+        local v581 = -ZONE_HALF
+
+        while v581 <= ZONE_HALF do
+            (function(p82, p83)
+                local v1061 = v572 * CFrame.new(p82, 0, p83)
+                local v1062 = math.floor(v1061.X / 3) .. ":" .. math.floor(v1061.Z / 3)
+
+                if t24[v1062] then
+                    return
+                end
+
+                local v1063 = t1.value11.claimedCells[v1062]
+
+                if v1063 and tick() - v1063 < 20 then
+                    return
+                end
+
+                local v1064 = v577(v1061.X, v1061.Z)
+
+                if v1064 < v576 then
+                    return
+                end
+
+                local v1065 = t1.value59(v1061.X, v1061.Z, v572.Position.Y)
+
+                if not v1065 then
+                    return
+                end
+
+                t24[v1062] = true
+
+                local v1066 = t23
+                local v1067 = #t23 + 1
+                local vector3 = Vector3.new(v1061.X, v1065, v1061.Z)
+                local v1069 = math.sqrt(v1064)
+
+                v1066[v1067] = {
+					key = v1062,
+					w = vector3,
+					lx = p82,
+					lz = p83,
+					clr = v1069
+				}
+            end)(v581, v580)
+            v581 += GRID_STEP
+        end
+
+        v580 += GRID_STEP
+    end
+
+    return t23
+end
+function t1.value83()
+    local Character = t1.value9.Character
+
+    return Character ~= nil and Character:FindFirstChildWhichIsA("Tool") ~= nil
+end
+function t1.value84(p84)
+    if t1.value83() then
+        return true
+    end
+
+    for _ = 1, 8 do
+        t1.value33(t1.value25.WearTool, p84)
+
+        for _ = 1, 4 do
+            t1.value3.Heartbeat:Wait()
+
+            if t1.value83() then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+t1.value10.SHAPE_FILE = "ShardPlaceShape.txt"
+t1.value11.placeOK = nil
+t1.value11.placeWhy = ""
+t1.value11.placeLog = {}
+t1.value11.placeFails = 0
+function t1.value85(p85, p86)
+    t1.value11.placeLog[#t1.value11.placeLog + 1] = tostring(p85) .. " " .. tostring(p86)
+
+    if #t1.value11.placeLog > 12 then
+        table.remove(t1.value11.placeLog, 1)
+    end
+end
+function t1.value86()
+    if t1.value11.placeOK and type(writefile) == "function" then
+        pcall(function()
+            writefile(t1.value10.SHAPE_FILE, (tostring(t1.value11.placeOK.origin)))
+        end)
+    end
+end
+if type(isfile) == "function" and type(readfile) == "function" then
+    local ok15, result14 = pcall(function()
+        if isfile(t1.value10.SHAPE_FILE) then
+            return readfile(t1.value10.SHAPE_FILE)
+        end
+
+        return nil
+    end)
+    local v40 = ok15 and tonumber(result14) or nil
+
+    if v40 and v40 >= 1 then
+        t1.value11.placeOK = {
+			origin = math.floor(v40)
+		}
+    end
+end
+function t1.value87(p87, p88, p89)
+    local v590 = t1.value81()[p88]
+
+    if not v590 then
+        return false
+    end
+
+    local v591 = t1.value26(t1.value25.EggPlace)
+
+    if not v591 or not v591:IsA("RemoteFunction") then
+        return false
+    end
+
+    if not t1.value83() then
+        return false
+    end
+
+    local Position = (v590:Inverse() * p89).Position
+    local cFrame = CFrame.new(Position)
+    local ok16, result15 = pcall(function()
+        return v591:InvokeServer({
+			Uid = p87,
+			LocalCFrame = cFrame
+		})
+    end)
+
+    if not ok16 then
+        if type(result15) == "string" and #result15 > 0 then
+            t1.value11.placeWhy = result15:sub(1, 140)
+        end
+
+        t1.value85("O" .. p88, result15)
+
+        return false
+    end
+
+    if type(result15) == "string" and #result15 > 0 then
+        t1.value11.placeWhy = result15:sub(1, 140)
+        t1.value85("O" .. p88, result15)
+    elseif type(result15) == "table" then
+        local v596 = result15.Error or (result15.Reason or (result15.Message or result15.Why))
+
+        if type(v596) == "string" and #v596 > 0 then
+            t1.value11.placeWhy = v596:sub(1, 140)
+        end
+
+        t1.value85("O" .. p88, v596 or "table reply")
+    else
+        t1.value11.placeWhy = "server returned " .. tostring(result15)
+        t1.value85("O" .. p88, "returned " .. tostring(result15))
+    end
+
+    for _ = 1, 16 do
+        if not t1.value83() then
+            return true
+        end
+
+        t1.value3.Heartbeat:Wait()
+    end
+
+    return false
+end
+function t1.value88(p90, p91)
+    local cFrame = CFrame.new(p91.w)
+    local v601 = t1.value81()
+
+    if t1.value11.placeOK and v601[t1.value11.placeOK.origin] then
+        return t1.value87(p90, t1.value11.placeOK.origin, cFrame)
+    end
+
+    for i = 1, #v601 do
+        local v603 = i
+
+        if t1.value87(p90, v603, cFrame) then
+            t1.value11.placeOK = {
+				origin = v603
+			}
+            t1.value86()
+
+            return true
+        end
+
+        task.wait(0.04)
+    end
+
+    return false
+end
+function t1.value89(p92, p93)
+    local v606 = p93 or 18
+    if not t1.value84(p92) then
+        t1.value11.placeWhy = "egg never reached the hand"
+
+        return false, false
+    end
+    local v607 = t1.value9.Character and t1.value9.Character:FindFirstChildWhichIsA("Tool")
+    if v607 then
+        local UID = v607:GetAttribute("UID")
+
+        if UID == nil then
+            for _, child in ipairs(v607:GetChildren()) do
+                if child:IsA("Model") then
+                    UID = child.Name:match("_(%w+)$")
+
+                    if UID then
+                        break
+                    end
+                end
+            end
+        end
+
+        if UID ~= nil then
+            p92 = tostring(UID)
+        end
+    end
+    if not t1.value11.placeOK then
+        t1.value11.placeLog = {}
+        t1.value11.placeWhy = ""
+    end
+    local v611 = t1.value82()
+    local v612 = t1.value81()
+    local v613 = v612[1] and v612[1].Position or (t1.value21() and t1.value21().Position or Vector3.zero)
+    table.sort(v611, function(p94, p95)
+        return (p94.w - v613).Magnitude < (p95.w - v613).Magnitude
+    end)
+    local v614 = #t1.value79()
+    local n15 = 0
+    for v618, v619 in ipairs(v611) do
+
+        n15 += 1
+
+        if t1.value88(p92, v619) then
+            t1.value11.claimedCells[v619.key] = tick()
+            t1.value11.placeFails = 0
+
+            return true
+        end
+
+        if not t1.value83() then
+            t1.value11.placeFails = 0
+
+            return true
+        end
+
+        if v606 <= n15 then
+            break
+        end
+
+        task.wait(0.04)
+    end
+    if not t1.value83() then
+        t1.value11.placeFails = 0
+
+        return true
+    end
+    if v614 < #t1.value79() then
+        t1.value11.placeFails = 0
+
+        return true
+    end
+    t1.value11.placeFails = t1.value11.placeFails + 1
+    if t1.value11.placeOK and t1.value11.placeFails >= 3 then
+        t1.value11.placeOK = nil
+        t1.value11.placeFails = 0
+    end
+
+    return false, #v611 == 0
+end
+function t1.value90(p96)
+    if t1.value27(t1.value25.EggCarry, {
+		Uid = p96
+	}) ~= true then
+        return false
+    end
+
+    task.spawn(function()
+        for _ = 1, 3 do
+            if t1.value83() then
+                return
+            end
+
+            t1.value33(t1.value25.WearTool, p96)
+            task.wait(0.15)
+        end
+    end)
+
+    return true
+end
+function t1.value91(p97)
+    local v622 = t1.value45()
+
+    if not v622 then
+        return true
+    end
+
+    return v622:FindFirstChild(p97) ~= nil
+end
+t1.value10.GRAB_TOLERANCE = 8
+local function v41(p98, p99)
+    local v625 = t1.value21()
+
+    if not v625 or not p98 then
+        return false
+    end
+
+    return (Vector3.new(v625.Position.X, 0, v625.Position.Z) - Vector3.new(p98.X, 0, p98.Z)).Magnitude <= (p99 or 12) + t1.value10.GRAB_TOLERANCE
+end
+t1.value11.carryingUid = nil
+function t1.value92(p100)
+    local v627 = t1.value47(p100.uid)
+
+    if v627 then
+        p100.pos = v627.Position
+    end
+
+    return p100.pos
+end
+function t1.value93()
+    return t1.value17() and t1.value14.AutoSteal
+end
+function t1.value94()
+    for _, child in ipairs(t1.value7:GetChildren()) do
+        if child.Name == "SmartPromptPart" then
+            local GetChildren = child.GetChildren
+
+            for _, v in ipairs(GetChildren(child)) do
+                if not (v:IsA("ProximityPrompt") and v.Enabled) then
+                    continue
+                end
+
+                local v633 = (v.Name .. " " .. tostring(v.ActionText) .. " " .. tostring(v.ObjectText)):lower()
+
+                if v633:find("place", 1, true) or (v633:find("plant", 1, true) or v633:find("drop", 1, true)) then
+                    return v
+                end
+            end
+        end
+    end
+
+    return nil
+end
+t1.value11.deliverAt = 0
+t1.value11.deliverFails = 0
+t1.value11.dryRuns = 0
+t1.value11.warnPlantAt = 0
+t1.value11.hatchAll = nil
+function t1.value95(p101)
+    local v635 = t1.value75()
+    local v636
+    if not v635 then
+        v636 = nil
+    else
+        local ok17, result16 = pcall(function()
+            return v635:GetPivot()
+        end)
+
+        v636 = ok17 and result16 or nil
+    end
+    if v636 and not v41(v636.Position, 26) then
+        t1.value71(v636.Position, 14, t1.value93)
+    end
+    local v639 = t1.value76()
+    if v639 and not v41(v639.Position, 12) then
+        t1.value71(v639.Position, 8, t1.value93)
+    end
+    local t25, v641 = t1.value89(p101)
+    if t25 then
+        return true
+    end
+    if v641 and t1.value11.hatchAll then
+        pcall(t1.value11.hatchAll, false)
+
+        if t1.value89(p101) then
+            return true
+        end
+    end
+    for _, v in ipairs({ t1.value94() }) do
+        if t1.value31(v) and t1.value30(v) then
+            for _ = 1, 12 do
+                if not t1.value83() then
+                    return true
+                end
+
+                t1.value3.Heartbeat:Wait()
+            end
+        end
+    end
+
+    return false
+end
+v4(function()
+    while t1.value17() do
+        local n16 = 0.1
+
+        if t1.value14.AutoSteal and t1.value23() then
+            local ok18, result17 = pcall(function()
+                if t1.value11.carryingUid then
+                    if not t1.value83() and not t1.value91(t1.value11.carryingUid) then
+                        t1.value11.carryingUid = nil
+                        t1.value11.deliverFails = 0
+
+                        return
+                    end
+
+                    if tick() - t1.value11.deliverAt < 1 then
+                        return
+                    end
+
+                    t1.value11.deliverAt = tick()
+
+                    if t1.value95(t1.value11.carryingUid) then
+                        t1.value11.carryingUid = nil
+                        t1.value11.deliverFails = 0
+
+                        return
+                    end
+
+                    t1.value11.deliverFails = t1.value11.deliverFails + 1
+
+                    if t1.value11.deliverFails >= 4 then
+                        t1.value11.deliverFails = 0
+                        t1.value33(t1.value25.DoffTool, t1.value11.carryingUid)
+                        t1.value11.carryingUid = nil
+
+                        if tick() - t1.value11.warnPlantAt > 60 then
+                            t1.value11.warnPlantAt = tick()
+                            t1.value20("Could not plant that egg" .. (#t1.value11.placeWhy > 0 and ": " .. t1.value11.placeWhy or "") .. ". Moving on to the next one.", 6)
+                        end
+                    end
+
+                    return
+                end
+
+                if t1.value14.SecretPriority and t1.value11.carryingUid then
+                    t1.value49(false)
+
+                    for i = 1, #t1.value11.eggList do
+                        local v1074 = t1.value11.eggList[i]
+
+                        if v1074.rank >= (t1.value10.rarityLadder.Secret or 8) and t1.value50(v1074) then
+                            local v1075
+                            for j = 1, #t1.value11.eggList do
+                                local v1077 = j
+
+                                if t1.value11.eggList[v1077].uid == t1.value11.carryingUid then
+                                    v1075 = t1.value11.eggList[v1077]
+
+                                    break
+                                end
+                            end
+                            if not ((v1075 and v1075.rank or 0) < v1074.rank) then
+                                break
+                            end
+                            pcall(function()
+                                t1.value33(t1.value25.DoffTool, t1.value11.carryingUid)
+                            end)
+                            t1.value11.carryingUid = nil
+                            t1.value11.deliverFails = 0
+                            t1.value11.travelToken = t1.value11.travelToken + 1
+                            t1.value11.travelling = false
+                            t1.value20("Secret egg spotted — switching targets!", 4)
+
+                            break
+                        end
+                    end
+                end
+
+                local v1078 = v28()
+
+                if not v1078 then
+                    t1.value11.dryRuns = t1.value11.dryRuns + 1
+                    t1.value49(true)
+                    n16 = math.min(0.6 + t1.value11.dryRuns * 0.4, 3)
+
+                    return
+                end
+
+                t1.value11.dryRuns = 0
+                t1.value11.triedUids[v1078.uid] = tick()
+
+                local v1079 = math.max(9, v1078.size * 0.6 + 7)
+
+                local function v1080()
+                    return t1.value93() and t1.value91(v1078.uid)
+                end
+
+                local v1081 = t1.value92(v1078)
+
+                if not v41(v1081, v1079) then
+                    t1.value71(v1081, v1079, v1080)
+
+                    if not t1.value93() then
+                        return
+                    end
+
+                    local v1082 = t1.value92(v1078)
+
+                    if not v41(v1082, v1079) then
+                        t1.value71(v1082, v1079, v1080)
+
+                        if not t1.value93() then
+                            return
+                        end
+                    end
+                end
+
+                local v1083 = t1.value90(v1078.uid)
+
+                if not v1083 then
+                    task.wait(0.1)
+                    v1083 = t1.value90(v1078.uid)
+                end
+
+                if v1083 then
+                    t1.value11.failUids[v1078.uid] = nil
+                    t1.value11.carryingUid = v1078.uid
+                    t1.value11.deliverAt = tick()
+                    t1.value11.deliverFails = 0
+
+                    if t1.value95(v1078.uid) then
+                        t1.value11.carryingUid = nil
+                    else
+                        t1.value11.deliverFails = 1
+                    end
+
+                    n16 = 0
+
+                    return
+                end
+
+                t1.value11.failUids[v1078.uid] = (t1.value11.failUids[v1078.uid] or 0) + 1
+            end)
+
+            if not ok18 then
+                warn("[Shard] steal: " .. tostring(result17))
+                task.wait(0.5)
+            end
+        else
+            n16 = 0.3
+        end
+
+        if n16 > 0 then
+            task.wait(n16)
+        else
+            t1.value3.Heartbeat:Wait()
+        end
+    end
+end)
+
+local value10 = t1.value10
+local W = Enum.KeyCode.W
+local vector3 = Vector3.new(0, 0, -1)
+local S = Enum.KeyCode.S
+local vector3_7 = Vector3.new(0, 0, 1)
+local A = Enum.KeyCode.A
+local vector3_8 = Vector3.new(-1, 0, 0)
+local D = Enum.KeyCode.D
+local vector3_9 = Vector3.new(1, 0, 0)
+
+value10.MOVE_KEYS = {
+	[W] = vector3,
+	[S] = vector3_7,
+	[A] = vector3_8,
+	[D] = vector3_9
+}
+t1.value11.held = {}
+v5(UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then
+        return
+    end
+
+    if t1.value10.MOVE_KEYS[input.KeyCode] then
+        t1.value11.held[input.KeyCode] = true
+    end
+end))
+v5(UserInputService.InputEnded:Connect(function(input)
+    if t1.value10.MOVE_KEYS[input.KeyCode] then
+        t1.value11.held[input.KeyCode] = nil
+    end
+end))
+v5(v2({ UserInputService.JumpRequest:Connect(function()
+    if not t1.value14.HumReady or t1.value11.travelling then
+        return
+    end
+
+    local v653 = t1.value22()
+
+    if v653 and v653.Health > 0 then
+        pcall(function()
+            v653:ChangeState(Enum.HumanoidStateType.Jumping)
+        end)
+    end
+end) }))
+t1.value96 = nil
+function t1.value96()
+    local CurrentCamera = t1.value7.CurrentCamera
+    if not CurrentCamera then
+        return Vector3.zero
+    end
+    local zero = Vector3.zero
+    for v658, v659 in pairs(t1.value10.MOVE_KEYS) do
+
+        if t1.value11.held[v658] then
+            zero += v659
+        end
+    end
+    if zero.Magnitude < 0.01 then
+        return Vector3.zero
+    end
+    local CurrentCameraCFrame = CurrentCamera.CFrame
+    local v661 = CurrentCameraCFrame.RightVector * zero.X - CurrentCameraCFrame.LookVector * zero.Z
+
+    return Vector3.new(v661.X, 0, v661.Z)
+end
+v4(function()
+    while t1.value17() do
+        t1.value3.Heartbeat:Wait()
+
+        if t1.value14.HumReady and (not t1.value11.travelling and not t1.value14.AutoTreadmill) then
+            local v662 = t1.value22()
+
+            if v662 and v662.Health > 0 then
+                local v663 = t1.value96()
+
+                if v663.Magnitude > 0.01 then
+                    v662:Move(v663.Unit, false)
+                end
+            end
+        end
+    end
+end)
+v5(t1.value9.CharacterAdded:Connect(function(character)
+    t1.value14.HumReady = false
+    t1.value11.carryingUid = nil
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+    pcall(function()
+        character:WaitForChild("HumanoidRootPart", 10)
+    end)
+    task.wait(0.7)
+
+    if t1.value14.AutoSteal then
+        if t1.value14.AntiCheat and (not t1.value14.HumReady and t1.value23()) then
+            v6()
+
+            return
+        end
+
+        local _ = t1.value14.HumReady
+    end
+end))
+t1.value11.hatchCursor = 0
+function t1.value97(p102)
+    if p102 then
+        local v667 = v37()
+
+        if not v667 then
+        elseif not v41(v667.Position, 20) then
+            t1.value71(v667.Position, 12)
+        end
+    end
+
+    local v668 = t1.value79()
+    local v669 = #v668
+
+    if v669 == 0 then
+        t1.value11.hatchCursor = 0
+    else
+        if v669 <= t1.value11.hatchCursor then
+            t1.value11.hatchCursor = 0
+        end
+
+        local v670 = p102 and v669 or math.min(v669, 12)
+        local v671 = false
+        local n17 = 0
+
+        while true do
+            n17 += 1
+
+            if (not v671 or not (v670 <= n17)) and (v671 or not (n17 <= v670)) then
+                break
+            end
+
+            local v673 = v668[(t1.value11.hatchCursor + n17 - 1) % v669 + 1]
+            local v674 = v673 and v673.Uid
+
+            if v674 then
+                t1.value33(t1.value25.SkipGrowth, v674)
+                t1.value33(t1.value25.Hatch, v674)
+                t1.value33(t1.value25.HatchFinish, v674)
+                task.wait(0.06)
+            end
+        end
+
+        t1.value11.hatchCursor = (t1.value11.hatchCursor + v670) % v669
+    end
+
+    local n18 = 0
+
+    if v669 > 0 then
+        local v676 = #t1.value79()
+
+        if v676 < v669 then
+            n18 = v669 - v676
+        end
+    end
+
+    if n18 == 0 then
+        for _, v in ipairs(t1.value32(t1.value75(), {
+			"hatch",
+			"open"
+		})) do
+            if t1.value31(v) and t1.value30(v) then
+                n18 += 1
+                task.wait(0.08)
+            end
+        end
+    end
+
+    return n18
+end
+t1.value11.hatchAll = t1.value97
+v4(function()
+    while t1.value17() do
+        if t1.value14.AutoHatch or t1.value14.HatchOnce and (t1.value23() and not t1.value11.travelling) then
+            t1.value14.HatchOnce = false
+            pcall(t1.value97, false)
+        end
+
+        task.wait(2)
+    end
+end)
+
+local value13_9 = t1.value13
+local color3 = Color3.fromRGB(190, 190, 190)
+local color3_2 = Color3.fromRGB(120, 220, 120)
+local color3_3 = Color3.fromRGB(90, 160, 255)
+local color3_4 = Color3.fromRGB(180, 110, 255)
+local color3_5 = Color3.fromRGB(255, 200, 70)
+local color3_6 = Color3.fromRGB(255, 110, 190)
+local color3_7 = Color3.fromRGB(130, 240, 255)
+local color3_8 = Color3.fromRGB(60, 60, 70)
+local color3_9 = Color3.fromRGB(255, 250, 200)
+local color3_10 = Color3.fromRGB(255, 90, 90)
+
+value13_9.rarityColor = {
+	Common = color3,
+	Uncommon = color3_2,
+	Rare = color3_3,
+	Epic = color3_4,
+	Legendary = color3_5,
+	Mythic = color3_6,
+	Cosmic = color3_7,
+	Secret = color3_8,
+	Divine = color3_9,
+	Eternal = color3_10
+}
+t1.value11.espFolder = nil
+t1.value11.espTags = {}
+t1.value98 = nil
+function t1.value98()
+    if t1.value11.espFolder and t1.value11.espFolder.Parent then
+        return t1.value11.espFolder
+    end
+
+    t1.value11.espFolder = Instance.new("Folder")
+    t1.value11.espFolder.Name = "ShardEggESP"
+    t1.value11.espFolder.Parent = gethui and gethui() or game:GetService("CoreGui")
+
+    return t1.value11.espFolder
+end
+function t1.value99()
+
+    for v686, v687 in pairs(t1.value11.espTags) do
+
+        local v688 = v687
+
+        pcall(function()
+            v688:Destroy()
+        end)
+        t1.value11.espTags[v686] = nil
+    end
+    if t1.value11.espFolder then
+        pcall(function()
+            t1.value11.espFolder:Destroy()
+        end)
+        t1.value11.espFolder = nil
+    end
+end
+function t1.value100(p103)
+    local v690 = t1.value46(p103.uid)
+    local v691 = t1.value47(p103.uid)
+
+    if not v690 or not v691 then
+        return nil
+    end
+
+    local v692 = t1.value13.rarityColor[p103.rarity] or Color3.fromRGB(255, 255, 255)
+    local Folder = Instance.new("Folder")
+
+    Folder.Name = p103.uid
+
+    local Highlight = Instance.new("Highlight")
+
+    Highlight.Adornee = v690
+    Highlight.FillColor = v692
+    Highlight.OutlineColor = p103.mutated and Color3.fromRGB(255, 150, 60) or v692
+    Highlight.FillTransparency = 0.62
+    Highlight.OutlineTransparency = 0
+    Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Highlight.Parent = Folder
+
+    local BillboardGui = Instance.new("BillboardGui")
+
+    BillboardGui.Adornee = v691
+    BillboardGui.Size = UDim2.fromOffset(190, 26)
+    BillboardGui.StudsOffsetWorldSpace = Vector3.new(0, 3.2, 0)
+    BillboardGui.AlwaysOnTop = true
+    BillboardGui.MaxDistance = 100000
+    BillboardGui.Parent = Folder
+
+    local TextLabel = Instance.new("TextLabel")
+
+    TextLabel.Size = UDim2.fromScale(1, 1)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Font = Enum.Font.GothamBold
+    TextLabel.TextSize = 13
+    TextLabel.TextColor3 = v692
+    TextLabel.TextStrokeTransparency = 0.35
+    TextLabel.Text = (p103.rarity or (p103.label or "Egg")) .. (not p103.mutated and "" or "  MUT")
+    TextLabel.Parent = BillboardGui
+    Folder.Parent = t1.value98()
+
+    return Folder
+end
+v4(function()
+    while t1.value17() do
+        if t1.value14.EggESP then
+            pcall(function()
+                local v1084 = t1.value49(false)
+                local t26 = {}
+                for v1088, v1089 in ipairs(v1084) do
+
+                    t26[v1089.uid] = true
+
+                    local v1090 = t1.value11.espTags[v1089.uid]
+
+                    if not v1090 or (not v1090.Parent or not t1.value46(v1089.uid)) then
+                        if v1090 then
+                            pcall(function()
+                                v1090:Destroy()
+                            end)
+                        end
+
+                        t1.value11.espTags[v1089.uid] = t1.value100(v1089)
+                    end
+                end
+                for k, v in pairs(t1.value11.espTags) do
+                    local v1093 = v
+                    local v1094 = k
+
+                    if not t26[v1094] then
+                        pcall(function()
+                            v1093:Destroy()
+                        end)
+                        t1.value11.espTags[v1094] = nil
+                    end
+                end
+            end)
+        elseif next(t1.value11.espTags) then
+            t1.value99()
+        end
+
+        task.wait(1.2)
+    end
+end)
+t1.value11.Lighting = game:GetService("Lighting")
+t1.value11.fpsSaved = nil
+t1.value11.hiddenParts = {}
+t1.value11.hiddenGuis = {}
+t1.value11.killedFx = {}
+function t1.value101(p104)
+    for _, player in ipairs(t1.value2:GetPlayers()) do
+        local Character = player.Character
+
+        if Character and p104 == Character or p104:IsDescendantOf(Character) then
+            return true
+        end
+    end
+
+    return false
+end
+local function v62(p105)
+    for _ = 1, 8 do
+        if not p105 or p105 == t1.value7 then
+            return false
+        end
+
+        local v725 = p105.Name:lower()
+
+        if v725:find("pet") or v725:find("pen") then
+            return true
+        end
+
+        p105 = p105.Parent
+    end
+
+    return false
+end
+function t1.value102()
+    local t27 = {}
+
+    for _, child in ipairs(t1.value7:GetChildren()) do
+        local v716 = child.Name:lower()
+
+        if v716:find("pet") or v716:find("pen") then
+            t27[#t27 + 1] = child
+        end
+    end
+
+    local Plots = t1.value7:FindFirstChild("Plots")
+
+    if Plots then
+        t27[#t27 + 1] = Plots
+    end
+
+    return t27
+end
+function t1.value103(p106)
+    if t1.value11.hiddenParts[p106] ~= nil then
+        return
+    end
+
+    t1.value11.hiddenParts[p106] = p106.LocalTransparencyModifier
+    pcall(function()
+        p106.LocalTransparencyModifier = 1
+    end)
+end
+function t1.value104(p107)
+    if t1.value11.hiddenGuis[p107] ~= nil then
+        return
+    end
+
+    t1.value11.hiddenGuis[p107] = p107.Enabled
+    pcall(function()
+        p107.Enabled = false
+    end)
+end
+t1.value105 = nil
+function t1.value105(p108)
+    if t1.value11.killedFx[p108] ~= nil then
+        return
+    end
+
+    local v728 = p108:IsA("ParticleEmitter")
+
+    if not v728 then
+        v728 = p108:IsA("Trail")
+
+        if not v728 then
+            v728 = p108:IsA("Beam")
+
+            if not v728 then
+                v728 = p108:IsA("Smoke")
+
+                if not v728 then
+                    v728 = p108:IsA("Fire") or (p108:IsA("Sparkles") or p108:IsA("PostEffect"))
+                end
+            end
+        end
+    end
+
+    if v728 then
+        t1.value11.killedFx[p108] = p108.Enabled
+        pcall(function()
+            p108.Enabled = false
+        end)
+    end
+end
+function t1.value106(p109)
+    for i = 1, #p109 do
+        local v731 = p109[i]
+
+        t1.value105(v731)
+
+        if not t1.value101(v731) and v62(v731) then
+            if v731:IsA("BasePart") then
+                t1.value103(v731)
+            elseif v731:IsA("BillboardGui") then
+                t1.value104(v731)
+            end
+        end
+    end
+end
+function t1.value107()
+    local Terrain = t1.value7:FindFirstChildWhichIsA("Terrain")
+
+    if not t1.value11.fpsSaved then
+        local value11_7 = t1.value11
+        local GlobalShadows = t1.value11.Lighting.GlobalShadows
+        local EnvironmentDiffuseScale = t1.value11.Lighting.EnvironmentDiffuseScale
+        local EnvironmentSpecularScale = t1.value11.Lighting.EnvironmentSpecularScale
+        local FogEnd = t1.value11.Lighting.FogEnd
+
+        value11_7.fpsSaved = {
+			shadows = GlobalShadows,
+			diffuse = EnvironmentDiffuseScale,
+			specular = EnvironmentSpecularScale,
+			fogEnd = FogEnd,
+			terrain = Terrain
+		}
+        pcall(function()
+            t1.value11.fpsSaved.quality = settings().Rendering.QualityLevel
+        end)
+
+        if Terrain then
+            t1.value11.fpsSaved.waveSize = Terrain.WaterWaveSize
+            t1.value11.fpsSaved.waveSpeed = Terrain.WaterWaveSpeed
+            t1.value11.fpsSaved.reflect = Terrain.WaterReflectance
+        end
+    end
+
+    pcall(function()
+        settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+    end)
+    pcall(function()
+        t1.value11.Lighting.GlobalShadows = false
+    end)
+    pcall(function()
+        t1.value11.Lighting.EnvironmentDiffuseScale = 0
+    end)
+    pcall(function()
+        t1.value11.Lighting.EnvironmentSpecularScale = 0
+    end)
+    pcall(function()
+        t1.value11.Lighting.FogEnd = 100000
+    end)
+
+    if Terrain then
+        pcall(function()
+            Terrain.WaterWaveSize = 0
+            Terrain.WaterWaveSpeed = 0
+            Terrain.WaterReflectance = 0
+        end)
+    end
+
+    for _, child in ipairs(t1.value11.Lighting:GetChildren()) do
+        t1.value105(child)
+    end
+
+    t1.value106(t1.value7:GetDescendants())
+end
+function t1.value108()
+
+    for v699, v700 in pairs(t1.value11.hiddenParts) do
+
+        local v701 = v699
+        local v702 = v700
+
+        pcall(function()
+            v701.LocalTransparencyModifier = v702
+        end)
+        t1.value11.hiddenParts[v701] = nil
+    end
+    for k, v in pairs(t1.value11.hiddenGuis) do
+        local v705 = v
+
+        pcall(function()
+            k.Enabled = v705
+        end)
+        t1.value11.hiddenGuis[k] = nil
+    end
+    for v708, v709 in pairs(t1.value11.killedFx) do
+
+        local v710 = v708
+        local v711 = v709
+
+        pcall(function()
+            v710.Enabled = v711
+        end)
+        t1.value11.killedFx[v710] = nil
+    end
+    if not t1.value11.fpsSaved then
+        return
+    end
+    pcall(function()
+        t1.value11.Lighting.GlobalShadows = t1.value11.fpsSaved.shadows
+    end)
+    pcall(function()
+        t1.value11.Lighting.EnvironmentDiffuseScale = t1.value11.fpsSaved.diffuse
+    end)
+    pcall(function()
+        t1.value11.Lighting.EnvironmentSpecularScale = t1.value11.fpsSaved.specular
+    end)
+    pcall(function()
+        t1.value11.Lighting.FogEnd = t1.value11.fpsSaved.fogEnd
+    end)
+    if t1.value11.fpsSaved.quality then
+        pcall(function()
+            settings().Rendering.QualityLevel = t1.value11.fpsSaved.quality
+        end)
+    end
+    local terrain = t1.value11.fpsSaved.terrain
+    if terrain and t1.value11.fpsSaved.waveSize then
+        pcall(function()
+            terrain.WaterWaveSize = t1.value11.fpsSaved.waveSize
+            terrain.WaterWaveSpeed = t1.value11.fpsSaved.waveSpeed
+            terrain.WaterReflectance = t1.value11.fpsSaved.reflect
+        end)
+    end
+    t1.value11.fpsSaved = nil
+end
+v4(function()
+    while t1.value17() do
+        task.wait(3)
+
+        if t1.value14.FpsBoost then
+            pcall(function()
+                for _, v in ipairs(t1.value102()) do
+                    local GetDescendants = v.GetDescendants
+
+                    t1.value106(GetDescendants(v))
+                end
+            end)
+        end
+    end
+end)
+t1.value109 = nil
+function t1.value109()
+    local v740 = v34()
+
+    if not v740 then
+        return false
+    end
+
+    if v41(v740.Position, 14) then
+        return true
+    end
+
+    return t1.value71(v740.Position, 8)
+end
+function t1.value110(p110)
+    if p110 then
+        t1.value109()
+    end
+
+    local v742 = t1.value74("SellAll")
+
+    if not (not v742 or not t1.value31(v742))then
+        t1.value30(v742)
+    end
+
+    t1.value27(t1.value25.SellEveryPet)
+    t1.value27(t1.value25.SatchelSale)
+
+    return "Sold every pet"
+end
+v4(function()
+    while t1.value17() do
+        if t1.value14.AutoEquipBest and t1.value23() then
+            t1.value27(t1.value25.WearBest)
+        end
+
+        task.wait(6)
+    end
+end)
+t1.value111 = nil
+function t1.value111(p111)
+    if p111 then
+        local v744 = v37()
+
+        if not v744 then
+        elseif not v41(v744.Position, 20) then
+            t1.value71(v744.Position, 12)
+        end
+    end
+
+    local n19 = 0
+
+    for _, v in ipairs(t1.value32(t1.value75(), {
+		"claim",
+		"collect",
+		"coin",
+		"cash"
+	})) do
+        if t1.value31(v) and t1.value30(v) then
+            n19 += 1
+            task.wait(0.06)
+        end
+    end
+
+    if t1.value27(t1.value25.Collect) then
+        n19 += 1
+    end
+
+    if t1.value27(t1.value25.CodexAll) then
+        n19 += 1
+    end
+
+    return n19
+end
+function t1.value112(p112)
+    if p112 then
+        local v680 = v37()
+
+        if not v680 then
+        elseif not v41(v680.Position, 20) then
+            t1.value71(v680.Position, 12)
+        end
+    end
+
+    local n20 = 0
+
+    for _, v in ipairs(t1.value32(t1.value75(), {
+		"upgrade",
+		"buy",
+		"purchase",
+		"tier",
+		"level"
+	})) do
+        if t1.value31(v) and t1.value30(v) then
+            n20 += 1
+            task.wait(0.06)
+        end
+    end
+
+    if t1.value27(t1.value25.BaseTierRaise) then
+        n20 += 1
+    end
+
+    if t1.value27(t1.value25.NearbyBuy) then
+        n20 += 1
+    end
+
+    return n20
+end
+v4(function()
+    while t1.value17() do
+        if t1.value14.AutoClaim and (t1.value23() and not t1.value11.travelling) then
+            pcall(t1.value111, false)
+        end
+
+        task.wait((math.clamp(t1.value14.ClaimInterval, 5, 300)))
+    end
+end)
+v4(function()
+    while t1.value17() do
+        if t1.value14.AutoUpgrade and (t1.value23() and not t1.value11.travelling) then
+            pcall(t1.value112, false)
+        end
+
+        task.wait((math.clamp(t1.value14.UpgradeInterval, 5, 300)))
+    end
+end)
+t1.value10.TREAD_AVOID = {
+	"upgrade",
+	"tier",
+	"level",
+	"board",
+	"sign",
+	"billboard",
+	"gui",
+	"shop",
+	"buy",
+	"display",
+	"screen",
+	"label",
+	"text",
+	"icon",
+	"price",
+	"cost",
+	"info",
+	"menu"
+}
+function t1.value113(p113)
+    local v752 = p113:lower()
+
+    for i = 1, #t1.value10.TREAD_AVOID do
+        if v752:find(t1.value10.TREAD_AVOID[i], 1, true) then
+            return true
+        end
+    end
+
+    return false
+end
+function t1.value114(p114, p115)
+    if not p114 then
+        return p115
+    end
+
+    if p114:IsA("Model") or p114:IsA("BasePart") and (p114.Name:lower():find("treadmill", 1, true) and not t1.value113(p114.Name)) then
+        p115[#p115 + 1] = p114
+    end
+
+    for _, descendant in ipairs(p114:GetDescendants()) do
+        if descendant:IsA("Model") or descendant:IsA("BasePart") and (descendant.Name:lower():find("treadmill", 1, true) and not t1.value113(descendant.Name)) then
+            p115[#p115 + 1] = descendant
+        end
+    end
+
+    return p115
+end
+function t1.value115(p116)
+    if p116:IsA("BasePart") then
+        return p116.Position
+    end
+
+    local ok19, result18 = pcall(function()
+        return p116:GetPivot()
+    end)
+
+    return ok19 and (not not result18 and result18.Position) or nil
+end
+t1.value11.treadCache = nil
+function t1.value116()
+    if t1.value11.treadCache and t1.value11.treadCache.Parent then
+        return t1.value11.treadCache
+    end
+    local t28 = {}
+    t1.value114(t1.value75(), t28)
+    if #t28 == 0 then
+        t1.value114(t1.value7:FindFirstChild("Treadmills"), t28)
+    end
+    if #t28 == 0 then
+        t1.value114(t1.value7:FindFirstChild("Stands"), t28)
+    end
+    if #t28 == 0 then
+        for _, child in ipairs(t1.value7:GetChildren()) do
+            if child.Name:lower():find("tread", 1, true) then
+                t1.value114(child, t28)
+            end
+        end
+    end
+    if #t28 == 0 then
+        return nil
+    end
+    local v761 = t1.value75()
+    local v762
+    if not v761 then
+        v762 = nil
+    else
+        local ok20, result19 = pcall(function()
+            return v761:GetPivot()
+        end)
+
+        v762 = ok20 and result19 or nil
+    end
+    local v765 = t1.value21()
+    if v762 then
+        v762 = v762.Position
+    end
+    local v766 = v762 or v765 and v765.Position
+    local v767
+    local v768
+    for i = 1, #t28 do
+        local v770 = i
+        local v771 = t1.value115(t28[v770])
+
+        if v771 then
+            local v772 = v766 and (v771 - v766).Magnitude
+            local v773 = t28[v770]
+            local v774 = v772 or 0
+            local v775 = (not v773:IsA("Model") and 0 or 40) - v774
+
+            if not v767 or v767 < v775 then
+                v767 = v775
+                v768 = t28[v770]
+            end
+        end
+    end
+    t1.value11.treadCache = v768
+
+    return t1.value11.treadCache
+end
+local function v63()
+    local v776 = t1.value116()
+
+    if not v776 then
+        return nil
+    end
+
+    if v776:IsA("Seat") or v776:IsA("VehicleSeat") then
+        return v776
+    end
+
+    if v776:IsA("BasePart") then
+        return nil
+    end
+
+    local GetDescendants = v776.GetDescendants
+
+    for _, v in ipairs(GetDescendants(v776)) do
+        if v:IsA("Seat") or v:IsA("VehicleSeat") then
+            return v
+        end
+    end
+
+    return nil
+end
+t1.value10.BELT_HINTS = {
+	"belt",
+	"tread",
+	"walk",
+	"run",
+	"platform",
+	"floor",
+	"deck",
+	"pad"
+}
+t1.value117 = nil
+function t1.value117()
+    local v788 = t1.value116()
+    if not v788 then
+        return nil
+    end
+    if v788:IsA("BasePart") then
+        return v788
+    end
+    local GetDescendants = v788.GetDescendants
+    local v790
+    local v791
+    for _, v in ipairs(GetDescendants(v788)) do
+        if v:IsA("BasePart") and not t1.value113(v.Name) then
+            local v794 = v.Name:lower()
+            local n21 = 0
+
+            for i = 1, #t1.value10.BELT_HINTS do
+                if v794:find(t1.value10.BELT_HINTS[i], 1, true) then
+                    n21 = 100000
+
+                    break
+                end
+            end
+
+            local v797 = n21 + v.Size.X * v.Size.Z
+
+            if not v790 or v790 < v797 then
+                v790 = v797
+                v791 = v
+            end
+        end
+    end
+
+    return v791 or v788.PrimaryPart
+end
+function t1.value118()
+    local v798 = v63()
+
+    if v798 then
+        return v798.CFrame
+    end
+
+    local v799 = t1.value117()
+
+    return v799 and v799.CFrame or nil
+end
+function t1.value119(p117)
+    local v781 = t1.value22()
+    local v782 = t1.value21()
+    local v783 = v781
+
+    if not p117 or (not v783 or not v782) then
+        return false
+    end
+
+    if v783.Sit then
+        return true
+    end
+
+    for _, v in ipairs(t1.value32(t1.value116(), {
+		"sit",
+		"ride",
+		"use",
+		"start"
+	})) do
+        if not (t1.value31(v) and t1.value30(v)) then
+            continue
+        end
+
+        task.wait(0.2)
+
+        if v783.Sit then
+            return true
+        end
+    end
+
+    pcall(function()
+        p117:Sit(v783)
+    end)
+
+    local v786 = p117.CFrame * CFrame.new(0, 1.4, 0)
+
+    for _ = 1, 24 do
+        if v783.Sit then
+            return true
+        end
+
+        pcall(function()
+            v782.CFrame = v786
+        end)
+        t1.value3.Heartbeat:Wait()
+    end
+
+    return v783.Sit == true
+end
+t1.value120 = nil
+function t1.value120()
+    local n22 = 0
+
+    if t1.value27(t1.value25.TreadRaise) then
+        n22 += 1
+    end
+
+    local v801 = t1.value116()
+
+    for _, v in ipairs(t1.value32(v801, {
+		"upgrade",
+		"level",
+		"tier",
+		"buy"
+	})) do
+        if t1.value31(v) and t1.value30(v) then
+            n22 += 1
+            task.wait(0.06)
+        end
+    end
+
+    return n22
+end
+v4(function()
+    local n23 = 0
+
+    while t1.value17() do
+        t1.value3.Heartbeat:Wait()
+
+        if t1.value14.AutoTreadmill and (t1.value23() and not t1.value11.travelling) then
+            local v805 = v63()
+            local v806 = t1.value118()
+            local v807 = t1.value21()
+            local v808 = v806
+            local v809 = t1.value22()
+
+            if v806 then
+                v808 = v807 and v809
+            end
+
+            if v808 then
+                if Vector3.new(v806.Position.X - v807.Position.X, 0, v806.Position.Z - v807.Position.Z).Magnitude > 12 and not v809.Sit then
+                    t1.value71(v806.Position, 6, function()
+                        return t1.value17() and t1.value14.AutoTreadmill
+                    end)
+                elseif v805 then
+                    if not v809.Sit then
+                        t1.value119(v805)
+                    end
+
+                    if t1.value14.AutoUpgradeTreadmill and tick() - n23 > 4 then
+                        n23 = tick()
+                        pcall(t1.value120)
+                    end
+                else
+                    local LookVector = v806.LookVector
+
+                    if (v807.Position - v806.Position):Dot(LookVector) > 6 then
+                        LookVector = -LookVector
+                    end
+
+                    pcall(function()
+                        v809.WalkSpeed = math.max(v809.WalkSpeed, 60)
+                    end)
+                    v809:Move(Vector3.new(LookVector.X, 0, LookVector.Z).Unit, false)
+
+                    if t1.value14.AutoUpgradeTreadmill and tick() - n23 > 4 then
+                        n23 = tick()
+                        pcall(t1.value120)
+                    end
+                end
+            end
+        end
+    end
+end)
+t1.value11.rawRequest = syn and syn.request or (http and http.request or (http_request or request))
+
+function t1.value121(p118)
+    if type(t1.value11.rawRequest) == "function" then
+        local ok21, result20 = pcall(t1.value11.rawRequest, {
+			Url = p118,
+			Method = "GET"
+		})
+
+        if ok21 then
+            ok21 = type(result20) == "table" and type(result20.Body) == "string"
+        end
+
+        if ok21 then
+            return result20.Body
+        end
+    end
+
+    local ok22, result21 = pcall(function()
+        return game:HttpGet(p118)
+    end)
+
+    if ok22 then
+        ok22 = type(result21) == "string"
+    end
+
+    if ok22 then
+        return result21
+    end
+
+    return nil
+end
+t1.value10.HOP_FILE = "ShardHopCount.txt"
+function t1.value122(p119)
+    if writefile then
+        pcall(writefile, t1.value10.HOP_FILE, (tostring(p119)))
+    end
+
+    if getgenv then
+        getgenv().__shardHops = p119
+    end
+end
+t1.value14.HopCount = (function()
+    if isfile and (readfile and isfile(t1.value10.HOP_FILE)) then
+        local success, result = pcall(readfile, t1.value10.HOP_FILE)
+        if success then
+            return tonumber(result) or 0
+        end
+    end
+
+    return tonumber(getgenv and getgenv().__shardHops) or 0
+end)()
+t1.value11.visited = {}
+t1.value11.hopping = false
+function t1.value123()
+    local v819 = "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Desc&excludeFullGames=true&limit=100"
+    local v820 = t1.value121(v819)
+
+    if not v820 then
+        return {}
+    end
+
+    local ok23, result22 = pcall(function()
+        return t1.value8:JSONDecode(v820)
+    end)
+    local v823 = not ok23
+
+    if not v823 then
+        v823 = type(result22) ~= "table" or type(result22.data) ~= "table"
+    end
+
+    if v823 then
+        return {}
+    end
+
+    local t30 = {}
+
+    for _, v in ipairs(result22.data) do
+        local id = v.id
+
+        if id then
+            id = v.id ~= game.JobId and (not t1.value11.visited[v.id] and (v.playing or 0) < (v.maxPlayers or 30))
+        end
+
+        if id then
+            t30[#t30 + 1] = v.id
+        end
+    end
+
+    for i = #t30, 2, -1 do
+        local v829 = math.random(i)
+        local v830 = t30[v829]
+        local v831 = t30[i]
+
+        t30[i] = v830
+        t30[v829] = v831
+    end
+
+    return t30
+end
+function t1.value124()
+    if t1.value11.hopping then
+        return false
+    end
+
+    t1.value11.hopping = true
+
+    local v832 = t1.value123()
+
+    for _, v in ipairs(v832) do
+        local v835 = v
+
+        t1.value11.visited[v835] = true
+        t1.value14.HopCount = t1.value14.HopCount + 1
+        t1.value122(t1.value14.HopCount)
+
+        if pcall(function()
+            t1.value5:TeleportToPlaceInstance(game.PlaceId, v835, t1.value9)
+        end) then
+            task.wait(6)
+            t1.value11.hopping = false
+
+            return true
+        end
+    end
+
+    pcall(function()
+        t1.value5:Teleport(game.PlaceId, t1.value9)
+    end)
+    t1.value11.hopping = false
+
+    return #v832 > 0
+end
+v4(function()
+    while t1.value17() do
+        if t1.value14.AutoHop then
+            if t1.value14.HopCount >= t1.value14.MaxHops then
+                t1.value14.AutoHop = false
+                t1.value43("AutoHop", false)
+                t1.value18("Server Hop", "Hop limit reached.")
+            else
+                pcall(t1.value124)
+            end
+        end
+
+        task.wait((math.clamp(t1.value14.HopDelay, 5, 300)))
+    end
+end)
+
+function t1.value125()
+    local RespawnLocation = t1.value9.RespawnLocation
+
+    if RespawnLocation and RespawnLocation:IsA("BasePart") then
+        return RespawnLocation.CFrame.Position + Vector3.new(0, 4, 0)
+    end
+
+    for _, descendant in ipairs(t1.value7:GetDescendants()) do
+        if descendant:IsA("SpawnLocation") then
+            return descendant.Position + Vector3.new(0, 4, 0)
+        end
+    end
+
+    local v846 = t1.value75()
+    local v847
+
+    if not v846 then
+        v847 = nil
+    else
+        local ok24, result23 = pcall(function()
+            return v846:GetPivot()
+        end)
+
+        v847 = ok24 and result23 or nil
+    end
+
+    return v847 and v847.Position or nil
+end
+function t1.value126()
+    t1.value14.Unloaded = true
+    t1.value14.AutoSteal = false
+    t1.value14.AutoHop = false
+    t1.value14.AutoHatch = false
+    t1.value14.EggESP = false
+    t1.value14.AutoEquipBest = false
+    t1.value14.AutoClaim = false
+    t1.value14.AutoUpgrade = false
+    t1.value14.AutoTreadmill = false
+    t1.value14.AutoUpgradeTreadmill = false
+    t1.value14.FpsBoost = false
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+    t1.value108()
+    t1.value99()
+    if stealGui then
+        pcall(function()
+            stealGui:Destroy()
+        end)
+        stealGui = nil
+        updateBtn = nil
+    end
+    for v838, v839 in ipairs(t1.value16) do
+
+        local v840 = v839
+
+        pcall(function()
+            v840:Disconnect()
+        end)
+    end
+    for _, v in ipairs(t1.value15) do
+        pcall(task.cancel, v)
+    end
+    t1.value51()
+end
+function t1.value127(p120)
+    local t31 = {}
+
+    if type(p120) == "table" then
+        for k, v in pairs(p120) do
+            if v == true then
+                t31[#t31 + 1] = k
+            elseif type(v) == "string" then
+                t31[#t31 + 1] = v
+            end
+        end
+
+        return t31
+    end
+
+    if type(p120) == "string" then
+        t31[1] = p120
+    end
+
+    return t31
+end
+t1.value10.filterValues = {}
+for _, v in ipairs(t1.value10.Rarities) do
+    t1.value10.filterValues[#t1.value10.filterValues + 1] = v
+end
+local value12 = t1.value12
+local value1 = t1.value1
+local uDim2 = UDim2.fromOffset(580, 430)
+local _UDim = UDim
+local CreateWindow = value1.CreateWindow
+local v71 = _UDim.new(0, 14)
+
+value12.Window = CreateWindow(value1, {
+	Title = "Steal an Egg",
+	Icon = "egg",
+	Author = "Shard Hub",
+	Folder = "ShardHub",
+	Size = uDim2,
+	Transparent = true,
+	Theme = "Dark",
+	SideBarWidth = 190,
+	HideSearchBar = true,
+	NewElements = true,
+	OpenButton = {
+		Enabled = true,
+		Title = "Shard Hub",
+		Draggable = true,
+		OnlyMobile = false,
+		CornerRadius = v71,
+		StrokeThickness = 2
+	}
+})
+local function v72()
+    for _, v in ipairs({
+		"Open",
+		"Maximize",
+		"Unminimize",
+		"Show"
+	}) do
+        local v857 = v
+
+        if pcall(function()
+            t1.value12.Window[v857](t1.value12.Window)
+        end) then
+            return true
+        end
+    end
+
+    return pcall(function()
+        t1.value12.Window:Minimize(false)
+    end)
+end
+v5(UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.RightControl then
+        v72()
+    end
+end))
+t1.value12.SecFarm = t1.value12.Window:Section({
+	Title = "FARM",
+	Opened = true
+})
+t1.value12.SecPets = t1.value12.Window:Section({
+	Title = "PETS",
+	Opened = true
+})
+t1.value12.SecUp = t1.value12.Window:Section({
+	Title = "UPGRADES",
+	Opened = true
+})
+t1.value12.SecSet = t1.value12.Window:Section({
+	Title = "SETTINGS",
+	Opened = true
+})
+t1.value12.TabSteal = t1.value12.SecFarm:Tab({
+	Title = "Auto Steal",
+	Icon = "zap"
+})
+t1.value12.TabStealFree = t1.value12.SecFarm:Tab({
+	Title = "Auto Steal Free",
+	Icon = "zap-off"
+})
+t1.value12.TabHop = t1.value12.SecFarm:Tab({
+	Title = "Server Hop",
+	Icon = "refresh-cw"
+})
+t1.value12.TabHatch = t1.value12.SecFarm:Tab({
+	Title = "Hatch & ESP",
+	Icon = "eye"
+})
+t1.value12.TabSell = t1.value12.SecPets:Tab({
+	Title = "Equip & Sell",
+	Icon = "coins"
+})
+t1.value12.TabVisualPet = t1.value12.SecPets:Tab({
+	Title = "Visual Pets",
+	Icon = "star"
+})
+t1.value12.TabClaim = t1.value12.SecUp:Tab({
+	Title = "Claim & Upgrade",
+	Icon = "arrow-up-circle"
+})
+t1.value12.TabTread = t1.value12.SecUp:Tab({
+	Title = "Treadmill",
+	Icon = "activity"
+})
+t1.value12.TabConfig = t1.value12.SecSet:Tab({
+	Title = "Configuration",
+	Icon = "settings"
+})
+t1.value128 = nil
+t1.value128 = {
+	AutoSteal = false,
+	ManualBase = nil,
+	SpeedChanger = false,
+	SpeedValue = 60,
+	HumReady = false,
+	VoidUnstuck = false,
+	AutoPutEggs = false,
+	PutEggsDelay = 0.4,
+	AreaFocus = {},
+	RarityFilter = {}
+}
+t1.value129 = 45
+t1.value130 = 0.08
+t1.value131 = 8
+t1.value132 = nil
+t1.value133 = nil
+t1.value134 = nil
+t1.value135 = false
+t1.value136 = nil
+t1.value137 = {}
+t1.value138 = {}
+function t1.value139()
+    local n24 = 0
+
+    for _, v in ipairs(t1.value128.AreaFocus) do
+        ({})[t1.value13.areaByLabel[v] or v] = true
+        n24 += 1
+    end
+end
+function t1.value140()
+    local n25 = 0
+
+    for _, v in ipairs(t1.value128.RarityFilter) do
+        ({})[v] = true
+        n25 += 1
+    end
+end
+function t1.value141()
+    local PlayerGui = t1.value9:FindFirstChild("PlayerGui")
+
+    if not PlayerGui then
+        return false
+    end
+
+    local v872 = false
+
+    local function v873(p121)
+        while p121 and p121 ~= PlayerGui do
+            if p121:IsA("GuiObject") and not p121.Visible then
+                return false
+            end
+
+            p121 = p121.Parent
+        end
+
+        return true
+    end
+
+    local v874 = false
+
+    for _, descendant in ipairs(PlayerGui:GetDescendants()) do
+        if descendant:IsA("TextButton") or descendant:IsA("TextLabel") then
+            local descendantText = descendant.Text
+
+            if descendantText:upper() == "RUN!!" and v873(descendant) then
+                v874 = true
+            end
+
+            if descendantText:lower() == "drop" and v873(descendant) then
+                v872 = true
+            end
+        end
+
+        if v874 and v872 then
+            return true
+        end
+    end
+
+    return false
+end
+function t1.value142(p122, p123)
+    if not p123 then
+        p123 = t1.value131
+    end
+
+    local v886 = t1.value21()
+
+    if p123 >= if v886 then Vector3.new(p122.X - v886.Position.X, 0, p122.Z - v886.Position.Z).Magnitude else 0 then
+        return true
+    end
+
+    local v887 = tick() + 30
+
+    while t1.value17() and t1.value128.AutoSteal and not (v887 < tick()) do
+        local v888 = t1.value21()
+        local v889 = t1.value22()
+        if not v888 or (not v889 or v889.Health <= 0) then
+            break
+        end
+        local v890 = t1.value21()
+        local v891 = if v890 then Vector3.new(p122.X - v890.Position.X, 0, p122.Z - v890.Position.Z).Magnitude else 0
+        if v891 <= p123 then
+            return true
+        end
+        local new = Vector3.new
+        local p122X = p122.X
+        local Unit = new(p122X - v888.Position.X, 0, p122.Z - v888.Position.Z).Unit
+        local v896 = math.min(t1.value129, v891)
+        local vector3_10 = Vector3.new(v888.Position.X + Unit.X * v896, v888.Position.Y, v888.Position.Z + Unit.Z * v896)
+        pcall(function()
+            v888.CFrame = CFrame.new(vector3_10) * CFrame.Angles(0, math.atan2(-Unit.X, -Unit.Z), 0)
+        end)
+        task.wait(t1.value130)
+    end
+
+    local v897 = t1.value21()
+
+    return ((if v897 then Vector3.new(p122.X - v897.Position.X, 0, p122.Z - v897.Position.Z).Magnitude else 0)) <= p123 + 4
+end
+function t1.value143()
+    if t1.value128.ManualBase then
+        return t1.value128.ManualBase
+    end
+
+    local v861 = t1.value75()
+    local v862
+
+    if not v861 then
+        v862 = nil
+    else
+        local ok25, result24 = pcall(function()
+            return v861:GetPivot()
+        end)
+
+        v862 = ok25 and result24 or nil
+    end
+
+    return v862 and v862.Position or nil
+end
+function t1.value144()
+    local Character = t1.value9.Character
+    local v866 = Character and Character:FindFirstChild("HumanoidRootPart")
+
+    if not v866 then
+        return
+    end
+
+    for _, descendant in ipairs(workspace:GetDescendants()) do
+        local v869 = descendant
+
+        if v869:IsA("ProximityPrompt") then
+            local Parent = v869.Parent
+
+            if Parent and Parent:IsA("BasePart") and (Parent.Position - v866.Position).Magnitude <= 50 then
+                pcall(function()
+                    if fireproximityprompt then
+                        fireproximityprompt(v869)
+                    end
+                end)
+            end
+        end
+    end
+end
+function t1.value145()
+    if t1.value132 then
+        t1.value132:Disconnect()
+        t1.value132 = nil
+    end
+end
+v4(function()
+    while t1.value17() do
+        t1.value3.Heartbeat:Wait()
+
+        if t1.value128.SpeedChanger and t1.value128.HumReady then
+            local v860 = t1.value22()
+
+            if v860 and v860.Health > 0 then
+                pcall(function()
+                    if v860.WalkSpeed ~= t1.value128.SpeedValue then
+                        v860.WalkSpeed = t1.value128.SpeedValue
+                    end
+                end)
+            end
+        end
+    end
+end)
+v4(function()
+    while t1.value17() do
+        t1.value3.Heartbeat:Wait()
+
+        if t1.value128.AutoSteal and t1.value23() and (t1.value141() and not t1.value135) then
+            t1.value135 = true
+            local success, result = pcall(function()
+                local v1100 = t1.value143()
+
+                if not v1100 then
+                    t1.value18("Auto Steal Free", "No base set! Walk to your pen and tap Set Base Here.")
+
+                    return
+                end
+
+                t1.value142(v1100, t1.value131)
+
+                for _ = 1, 2 do
+                    if pcall(t1.value89, t1.value136 or "") then
+                        break
+                    end
+
+                    task.wait(0.2)
+                end
+
+                for _, v in ipairs(t1.value32(t1.value75(), {
+					"place",
+					"drop",
+					"put"
+				})) do
+                    local v1104 = v.Parent and (v.Parent:IsA("BasePart") and v.Parent.Position)
+
+                    if v41(v1104, 12) and t1.value30(v) then
+                        task.wait(0.15)
+
+                        return
+                    end
+                end
+            end)
+            if not success then
+                warn("[ShardFree] " .. tostring(result))
+            end
+            task.delay(1.5, function()
+                t1.value135 = false
+            end)
+        end
+    end
+end)
+t1.value146 = nil
+function t1.value146(p124)
+    t1.value128.AutoSteal = p124
+
+    if p124 then
+        if not t1.value132 then
+            t1.value3.Heartbeat:Connect(function()
+                if t1.value128.AutoSteal then
+                    t1.value144()
+                end
+            end)
+        end
+
+        if not t1.value128.ManualBase then
+            t1.value18("Auto Steal Free", "Tip: walk to your pen and tap Set Base Here first!")
+        end
+    else
+        t1.value145()
+    end
+
+    if t1.value134 then
+        t1.value134()
+    end
+end
+function t1.value147()
+    if t1.value133 and t1.value133.Parent then
+        return
+    end
+
+    local ScreenGui = Instance.new("ScreenGui")
+
+    ScreenGui.Name = "ShardStealFreeGui"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.DisplayOrder = 999
+    pcall(function()
+        ScreenGui.Parent = t1.value11.hostGui
+    end)
+
+    if not ScreenGui.Parent then
+        ScreenGui.Parent = t1.value9.PlayerGui
+    end
+
+    t1.value133 = ScreenGui
+
+    local Frame = Instance.new("Frame")
+
+    Frame.Size = UDim2.fromOffset(160, 72)
+    Frame.Position = UDim2.new(0.5, -80, 0.14, 0)
+    Frame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+    Frame.BorderSizePixel = 0
+    Frame.Active = true
+    Frame.Draggable = true
+    Frame.Parent = ScreenGui
+    Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 10)
+
+    local UIStroke = Instance.new("UIStroke", Frame)
+
+    UIStroke.Color = Color3.fromRGB(80, 80, 80)
+    UIStroke.Thickness = 1
+
+    local TextLabel = Instance.new("TextLabel")
+
+    TextLabel.Size = UDim2.new(1, -20, 0, 22)
+    TextLabel.Position = UDim2.new(0, 0, 0, 4)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Text = "Steal Free"
+    TextLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    TextLabel.Font = Enum.Font.GothamBold
+    TextLabel.TextSize = 12
+    TextLabel.Parent = Frame
+
+    local TextButton = Instance.new("TextButton")
+
+    TextButton.Size = UDim2.fromOffset(18, 18)
+    TextButton.Position = UDim2.new(1, -20, 0, 3)
+    TextButton.BackgroundTransparency = 1
+    TextButton.Text = "✕"
+    TextButton.TextColor3 = Color3.fromRGB(160, 160, 160)
+    TextButton.Font = Enum.Font.Gotham
+    TextButton.TextSize = 12
+    TextButton.BorderSizePixel = 0
+    TextButton.Parent = Frame
+    TextButton.MouseButton1Click:Connect(function()
+        t1.value146(false)
+        ScreenGui:Destroy()
+        t1.value133 = nil
+        t1.value134 = nil
+    end)
+
+    local TextButton2 = Instance.new("TextButton")
+
+    TextButton2.Size = UDim2.new(1, -20, 0, 30)
+    TextButton2.Position = UDim2.new(0, 10, 0, 32)
+    TextButton2.BackgroundColor3 = Color3.fromRGB(50, 180, 80)
+    TextButton2.Text = "Start"
+    TextButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextButton2.Font = Enum.Font.GothamBold
+    TextButton2.TextSize = 14
+    TextButton2.BorderSizePixel = 0
+    TextButton2.Parent = Frame
+    Instance.new("UICorner", TextButton2).CornerRadius = UDim.new(0, 6)
+
+    function t1.value134()
+        local AutoSteal = t1.value128.AutoSteal
+
+        TextButton2.Text = not AutoSteal and "Start" or "Stop"
+        TextButton2.BackgroundColor3 = AutoSteal and Color3.fromRGB(200, 50, 50) or Color3.fromRGB(50, 180, 80)
+    end
+
+    t1.value134()
+    TextButton2.MouseButton1Click:Connect(function()
+        t1.value146(not t1.value128.AutoSteal)
+    end)
+end
+t1.value12.TabStealFree:Section({
+	Title = "Anti-Cheat Bypass"
+})
+t1.value12.TabStealFree:Toggle({
+	Title = "Enable Anti-Cheat Bypass",
+	Desc = "Replaces the Humanoid so WalkSpeed governor hits a dead object",
+	Value = false,
+	Callback = function(p125)
+    t1.value128.HumReady = false
+
+    if p125 then
+        task.spawn(function()
+            local v1106 = v6()
+
+            t1.value128.HumReady = v1106
+            t1.value18("Anti-Cheat", not v1106 and "Not ready." or "Bypass active.")
+        end)
+
+        return
+    end
+
+    t1.value18("Anti-Cheat", "Bypass disabled.")
+end
+})
+t1.value12.TabStealFree:Toggle({
+	Title = "Void Unstuck",
+	Desc = "Ejects you from the treadmill when the bypass causes you to get stuck",
+	Value = false,
+	Callback = function(p126)
+    t1.value128.VoidUnstuck = p126
+end
+})
+t1.value12.TabStealFree:Toggle({
+	Title = "Speed Changer",
+	Desc = "Locks WalkSpeed every frame. Requires Bypass active.",
+	Value = false,
+	Callback = function(p127)
+    t1.value128.SpeedChanger = p127
+
+    if p127 and not t1.value128.HumReady then
+        t1.value18("Speed", "Enable Anti-Cheat Bypass first!")
+
+        return
+    end
+
+    if not p127 then
+        local v910 = t1.value22()
+
+        if v910 then
+            pcall(function()
+                v910.WalkSpeed = 16
+            end)
+        end
+    end
+end
+})
+local TabStealFree = t1.value12.TabStealFree
+local Slider = TabStealFree.Slider
+local t33 = {
+	Min = 16,
+	Max = 500,
+	Default = 60
+}
+Slider(TabStealFree, {
+	Title = "Walk Speed",
+	Desc = "Requires Bypass active.",
+	Step = 1,
+	Value = t33,
+	Callback = function(p128)
+    t1.value128.SpeedValue = p128
+
+    if t1.value128.SpeedChanger then
+        local v912 = t1.value22()
+
+        if v912 then
+            pcall(function()
+                v912.WalkSpeed = p128
+            end)
+        end
+    end
+end
+})
+t1.value12.TabStealFree:Section({
+	Title = "Base Location"
+})
+t1.value12.TabStealFree:Button({
+	Title = "Set Base Here",
+	Desc = "Walk to your pen then tap this",
+	Callback = function()
+    local v913 = t1.value21()
+
+    if v913 then
+        t1.value128.ManualBase = v913.Position
+        t1.value18("Base", string.format("Pinned at (%.0f, %.0f, %.0f)", v913.Position.X, v913.Position.Y, v913.Position.Z))
+
+        return
+    end
+
+    t1.value18("Base", "No root part found.")
+end
+})
+t1.value12.TabStealFree:Button({
+	Title = "Clear Base Pin",
+	Callback = function()
+    t1.value128.ManualBase = nil
+    t1.value18("Base", "Cleared.")
+end
+})
+t1.value12.TabStealFree:Section({
+	Title = "Auto Steal Free"
+})
+t1.value12.TabStealFree:Toggle({
+	Title = "Enable Auto Steal Free",
+	Desc = "Detects when you grab an egg (RUN!! + Drop visible) → walk TPs to base",
+	Value = false,
+	Callback = function(p129)
+    if p129 then
+        t1.value147()
+        t1.value146(true)
+
+        return
+    end
+
+    t1.value146(false)
+
+    if t1.value133 then
+        pcall(function()
+            t1.value133:Destroy()
+        end)
+        t1.value133 = nil
+    end
+end
+})
+local TabStealFree2 = t1.value12.TabStealFree
+local v77 = t1.value37()
+TabStealFree2:Dropdown({
+	Title = "Focus Area",
+	Desc = "Leave empty for all areas",
+	Values = v77,
+	Value = {},
+	Multi = true,
+	AllowNone = true,
+	Callback = function(p130)
+    local t34 = {}
+
+    if type(p130) == "table" then
+        for k, v in pairs(p130) do
+            if v == true then
+                t34[#t34 + 1] = k
+            elseif type(v) == "string" then
+                t34[#t34 + 1] = v
+            end
+        end
+    end
+
+    t1.value128.AreaFocus = t34
+    t1.value139()
+end
+})
+local TabStealFree3 = t1.value12.TabStealFree
+local Dropdown = TabStealFree3.Dropdown
+local filterValues = t1.value10.filterValues
+Dropdown(TabStealFree3, {
+	Title = "Egg Rarity Filter",
+	Desc = "Leave empty for all rarities",
+	Values = filterValues,
+	Value = {},
+	Multi = true,
+	AllowNone = true,
+	Callback = function(p131)
+    local t35 = {}
+
+    if type(p131) == "table" then
+        for k, v in pairs(p131) do
+            if v == true then
+                t35[#t35 + 1] = k
+            elseif type(v) == "string" then
+                t35[#t35 + 1] = v
+            end
+        end
+    end
+
+    t1.value128.RarityFilter = t35
+    t1.value140()
+end
+})
+v5(game:GetService("Players").PlayerRemoving:Connect(function(player)
+    if player == t1.value9 then
+        t1.value145()
+
+        if t1.value133 then
+            pcall(function()
+                t1.value133:Destroy()
+            end)
+        end
+    end
+end))
+t1.value12.TabSteal:Section({
+	Title = "Auto Steal"
+})
+t1.value148 = nil
+t1.value149 = nil
+function t1.value150()
+    if t1.value148 and t1.value148.Parent then
+        return
+    end
+
+    local ScreenGui = Instance.new("ScreenGui")
+
+    ScreenGui.Name = "ShardStealGui"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.DisplayOrder = 999
+    pcall(function()
+        ScreenGui.Parent = t1.value11.hostGui
+    end)
+
+    if not ScreenGui.Parent then
+        ScreenGui.Parent = t1.value9.PlayerGui
+    end
+
+    t1.value148 = ScreenGui
+
+    local Frame = Instance.new("Frame")
+
+    Frame.Size = UDim2.fromOffset(160, 72)
+    Frame.Position = UDim2.new(0.5, -80, 0.05, 0)
+    Frame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+    Frame.BorderSizePixel = 0
+    Frame.Active = true
+    Frame.Draggable = true
+    Frame.Parent = ScreenGui
+    Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 10)
+
+    local UIStroke = Instance.new("UIStroke", Frame)
+
+    UIStroke.Color = Color3.fromRGB(80, 80, 80)
+    UIStroke.Thickness = 1
+
+    local TextLabel = Instance.new("TextLabel")
+
+    TextLabel.Size = UDim2.new(1, -20, 0, 22)
+    TextLabel.Position = UDim2.new(0, 0, 0, 4)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Text = "Auto Steal"
+    TextLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    TextLabel.Font = Enum.Font.GothamBold
+    TextLabel.TextSize = 12
+    TextLabel.Parent = Frame
+
+    local TextButton = Instance.new("TextButton")
+
+    TextButton.Size = UDim2.fromOffset(18, 18)
+    TextButton.Position = UDim2.new(1, -20, 0, 3)
+    TextButton.BackgroundTransparency = 1
+    TextButton.Text = "✕"
+    TextButton.TextColor3 = Color3.fromRGB(160, 160, 160)
+    TextButton.Font = Enum.Font.Gotham
+    TextButton.TextSize = 12
+    TextButton.BorderSizePixel = 0
+    TextButton.Parent = Frame
+    TextButton.MouseButton1Click:Connect(function()
+        t1.value14.AutoSteal = false
+        t1.value43("AutoSteal", false)
+        pcall(function()
+            ScreenGui:Destroy()
+        end)
+        t1.value148 = nil
+        t1.value149 = nil
+    end)
+
+    local TextButton3 = Instance.new("TextButton")
+
+    TextButton3.Size = UDim2.new(1, -20, 0, 30)
+    TextButton3.Position = UDim2.new(0, 10, 0, 32)
+    TextButton3.BackgroundColor3 = Color3.fromRGB(50, 180, 80)
+    TextButton3.Text = "Start"
+    TextButton3.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextButton3.Font = Enum.Font.GothamBold
+    TextButton3.TextSize = 14
+    TextButton3.BorderSizePixel = 0
+    TextButton3.Parent = Frame
+    Instance.new("UICorner", TextButton3).CornerRadius = UDim.new(0, 6)
+
+    function t1.value149()
+        local AutoSteal = t1.value14.AutoSteal
+
+        TextButton3.Text = not AutoSteal and "Start" or "Stop"
+        TextButton3.BackgroundColor3 = AutoSteal and Color3.fromRGB(200, 50, 50) or Color3.fromRGB(50, 180, 80)
+    end
+
+    t1.value149()
+    TextButton3.MouseButton1Click:Connect(function()
+        local v1108 = not t1.value14.AutoSteal
+
+        t1.value14.AutoSteal = v1108
+        t1.value43("AutoSteal", v1108)
+
+        if v1108 then
+            t1.value14.AntiCheat = true
+            task.spawn(function()
+                if t1.value14.AntiCheat and (not t1.value14.HumReady and t1.value23()) then
+                    v6()
+                else
+                    local _ = t1.value14.HumReady
+                end
+
+                t1.value52()
+
+                if t1.value14.FarmMethod == "TP Walk" then
+                    t1.value18("Auto Steal", "Running the TP Walk route, " .. t1.value10.TP_STEP .. " studs every " .. t1.value10.TP_WAIT .. "s.")
+
+                    return
+                end
+
+                t1.value18("Auto Steal", "Running the ground route at " .. t1.value10.TRAVEL_SPEED .. " studs.")
+            end)
+        else
+            t1.value11.travelToken = t1.value11.travelToken + 1
+            t1.value11.travelling = false
+            t1.value51()
+            t1.value18("Auto Steal", "Stopped.")
+        end
+
+        t1.value149()
+    end)
+end
+t1.value41.AutoSteal = t1.value12.TabSteal:Toggle({
+	Title = "Enable Auto Steal",
+	Desc = "Takes the rarest egg first, plants it on your base and goes straight back out",
+	Value = false,
+	Callback = function(p132)
+    t1.value14.AutoSteal = p132
+
+    if p132 then
+        t1.value150()
+
+        if t1.value149 then
+            t1.value149()
+        end
+
+        t1.value14.AntiCheat = true
+        task.spawn(function()
+            if t1.value14.AntiCheat and (not t1.value14.HumReady and t1.value23()) then
+                v6()
+            else
+                local _ = t1.value14.HumReady
+            end
+
+            t1.value52()
+
+            if t1.value14.FarmMethod == "TP Walk" then
+                t1.value18("Auto Steal", "Running the TP Walk route, " .. t1.value10.TP_STEP .. " studs every " .. t1.value10.TP_WAIT .. "s.")
+
+                return
+            end
+
+            t1.value18("Auto Steal", "Running the ground route at " .. t1.value10.TRAVEL_SPEED .. " studs.")
+        end)
+
+        return
+    end
+
+    if t1.value149 then
+        t1.value149()
+    end
+
+    if t1.value148 then
+        pcall(function()
+            t1.value148:Destroy()
+        end)
+        t1.value148 = nil
+    end
+
+    t1.value11.travelToken = t1.value11.travelToken + 1
+    t1.value11.travelling = false
+    t1.value51()
+    t1.value18("Auto Steal", "Stopped.")
+end
+})
+local TabSteal = t1.value12.TabSteal
+local FarmMethod = t1.value14.FarmMethod
+TabSteal:Dropdown({
+	Title = "Farm Method",
+	Desc = "Speed slides along the ground, TP Walk hops in place to place jumps",
+	Values = {
+		"Speed",
+		"TP Walk"
+	},
+	Value = FarmMethod,
+	Callback = function(p133)
+    local v932 = t1.value127(p133)[1]
+
+    if v932 == "Speed" or v932 == "TP Walk" then
+        t1.value14.FarmMethod = v932
+        t1.value11.travelToken = t1.value11.travelToken + 1
+        t1.value11.travelling = false
+    end
+end
+})
+t1.value12.TabSteal:Toggle({
+	Title = "Secret Egg Priority",
+	Desc = "Drops current egg and immediately targets any Secret, Divine or Eternal that spawns",
+	Value = true,
+	Callback = function(p134)
+    t1.value14.SecretPriority = p134
+end
+})
+t1.value41.AntiTrap = t1.value12.TabSteal:Toggle({
+	Desc = "Routes around traps other players drop and breaks the hold if one closes on you",
+	Value = true,
+	Callback = function(p135)
+    t1.value14.AntiTrap = p135
+    task.spawn(function()
+        t1.value52()
+
+        if p135 then
+            t1.value55()
+        end
+    end)
+end
+})
+local value41 = t1.value41
+local TabSteal2 = t1.value12.TabSteal
+local Dropdown2 = TabSteal2.Dropdown
+local v86 = t1.value37()
+local AreaFocus = t1.value14.AreaFocus
+value41.AreaFocus = Dropdown2(TabSteal2, {
+	Title = "Focus Area",
+	Desc = "Pick as many areas as you want, leave it empty for every area",
+	Values = v86,
+	Value = AreaFocus,
+	Multi = true,
+	AllowNone = true,
+	Callback = function(p136)
+    t1.value14.AreaFocus = t1.value127(p136)
+    t1.value40()
+end
+})
+local TabSteal3 = t1.value12.TabSteal
+local filterValues2 = t1.value10.filterValues
+local RarityFilter = t1.value14.RarityFilter
+TabSteal3:Dropdown({
+	Title = "Egg Rarity Filter",
+	Desc = "Pick as many rarities as you want, leave it empty for every rarity",
+	Values = filterValues2,
+	Value = RarityFilter,
+	Multi = true,
+	AllowNone = true,
+	Callback = function(p137)
+    t1.value14.RarityFilter = t1.value127(p137)
+    t1.value42()
+end
+})
+t1.value12.TabHop:Section({
+	Title = "Server Hop"
+})
+t1.value41.AutoHop = t1.value12.TabHop:Toggle({
+	Title = "Enable Auto Server Hop",
+	Desc = "Rotates through public servers until the hop limit is spent",
+	Value = false,
+	Callback = function(p138)
+    t1.value14.AutoHop = p138
+
+    if p138 then
+        t1.value18("Server Hop", t1.value14.HopCount .. " of " .. t1.value14.MaxHops .. " hops used.")
+    end
+end
+})
+local TabHop = t1.value12.TabHop
+local MaxHops = t1.value14.MaxHops
+local t36 = {
+	Min = 1,
+	Max = 100,
+	Default = MaxHops
+}
+TabHop:Slider({
+	Title = "Max Hops",
+	Desc = "Hops allowed before the toggle switches itself off",
+	Step = 1,
+	Value = t36,
+	Callback = function(p139)
+    t1.value14.MaxHops = p139
+end
+})
+local TabHop2 = t1.value12.TabHop
+local value14 = t1.value14
+local Slider2 = TabHop2.Slider
+local HopDelay = value14.HopDelay
+local t37 = {
+	Min = 5,
+	Max = 120,
+	Default = HopDelay
+}
+Slider2(TabHop2, {
+	Title = "Check Delay",
+	Desc = "Seconds between hops",
+	Step = 1,
+	Value = t37,
+	Callback = function(p140)
+    t1.value14.HopDelay = p140
+end
+})
+t1.value12.TabHop:Button({
+	Title = "Server Hop Now",
+	Callback = function()
+    task.spawn(function()
+        t1.value18("Server Hop", not t1.value124() and "No open server answered." or "Teleporting.")
+    end)
+end
+})
+t1.value12.TabHop:Button({
+	Title = "Recall to Spawn",
+	Callback = function()
+    task.spawn(function()
+        local value18 = t1.value18
+        local v1111 = t1.value125()
+
+        value18("Recall", not (if v1111 then t1.value71(v1111, 8) else false) and "No spawn point found." or "Back at spawn.")
+    end)
+end
+})
+t1.value12.TabHatch:Section({
+	Title = "Hatch & ESP"
+})
+t1.value41.AutoHatch = t1.value12.TabHatch:Toggle({
+	Title = "Enable Auto Hatch",
+	Desc = "Keeps your base empty so Auto Steal always has room to plant the next egg",
+	Value = false,
+	Callback = function(p141)
+    t1.value14.AutoHatch = p141
+end
+})
+t1.value12.TabHatch:Button({
+	Title = "Hatch Once",
+	Callback = function()
+    task.spawn(function()
+        t1.value18("Hatch", "Hatched " .. t1.value97(true) .. " eggs.")
+    end)
+end
+})
+t1.value41.EggESP = t1.value12.TabHatch:Toggle({
+	Title = "Enable Egg ESP",
+	Desc = "Outlines every field egg and labels its rarity, visible across the whole map",
+	Value = false,
+	Callback = function(p142)
+    t1.value14.EggESP = p142
+
+    if not p142 then
+        t1.value99()
+    end
+end
+})
+t1.value41.FpsBoost = t1.value12.TabHatch:Toggle({
+	Title = "FPS Boost",
+	Desc = "Cheapest rendering settings and hides everybody's pets",
+	Value = false,
+	Callback = function(p143)
+    t1.value14.FpsBoost = p143
+    task.spawn(function()
+        if p143 then
+            t1.value107()
+            t1.value18("FPS Boost", "Effects off and pets hidden.")
+
+            return
+        end
+
+        t1.value108()
+        t1.value18("FPS Boost", "Everything restored.")
+    end)
+end
+})
+t1.value12.TabSell:Section({
+	Title = "Equip & Sell"
+})
+t1.value12.TabSell:Toggle({
+	Title = "Enable Auto Equip Best",
+	Desc = "Keeps your strongest pets worn",
+	Value = false,
+	Callback = function(p144)
+    t1.value14.AutoEquipBest = p144
+end
+})
+t1.value12.TabSell:Button({
+	Title = "Equip Best Now",
+	Callback = function()
+    t1.value18("Pets", not t1.value27(t1.value25.WearBest) and "The server refused." or "Equipped the best pets.")
+end
+})
+t1.value12.TabSell:Button({
+	Title = "Sell Inventory Now",
+	Callback = function()
+    task.spawn(function()
+        t1.value18("Pets", t1.value110(true))
+    end)
+end
+})
+t1.value12.TabClaim:Section({
+	Title = "Claim & Upgrade"
+})
+t1.value12.TabClaim:Toggle({
+	Title = "Enable Auto Claim",
+	Desc = "Collects base earnings and finished quest rewards",
+	Value = false,
+	Callback = function(p145)
+    t1.value14.AutoClaim = p145
+end
+})
+local TabClaim = t1.value12.TabClaim
+local Slider3 = TabClaim.Slider
+local ClaimInterval = t1.value14.ClaimInterval
+local t38 = {
+	Min = 5,
+	Max = 300,
+	Default = ClaimInterval
+}
+Slider3(TabClaim, {
+	Title = "Claim Interval",
+	Desc = "Seconds between claims",
+	Step = 1,
+	Value = t38,
+	Callback = function(p146)
+    t1.value14.ClaimInterval = p146
+end
+})
+t1.value12.TabClaim:Button({
+	Title = "Claim Now",
+	Callback = function()
+    task.spawn(function()
+        t1.value18("Claim", "Fired " .. t1.value111(true) .. " claims.")
+    end)
+end
+})
+t1.value12.TabClaim:Toggle({
+	Title = "Enable Auto Upgrade",
+	Desc = "Raises the base tier and buys whatever upgrade is in reach",
+	Value = false,
+	Callback = function(p147)
+    t1.value14.AutoUpgrade = p147
+end
+})
+local TabClaim2 = t1.value12.TabClaim
+local UpgradeInterval = t1.value14.UpgradeInterval
+local t39 = {
+	Min = 5,
+	Max = 300,
+	Default = UpgradeInterval
+}
+TabClaim2:Slider({
+	Title = "Upgrade Interval",
+	Desc = "Seconds between upgrade attempts",
+	Step = 1,
+	Value = t39,
+	Callback = function(p148)
+    t1.value14.UpgradeInterval = p148
+end
+})
+t1.value12.TabClaim:Button({
+	Title = "Upgrade Now",
+	Callback = function()
+    task.spawn(function()
+        t1.value18("Upgrade", "Fired " .. t1.value112(true) .. " upgrades.")
+    end)
+end
+})
+t1.value12.TabTread:Section({
+	Title = "Treadmill"
+})
+t1.value12.TabTread:Toggle({
+	Title = "Enable Auto Treadmill",
+	Desc = "Sits on the treadmill itself, or walks the belt when it has no seat",
+	Value = false,
+	Callback = function(p149)
+    t1.value14.AutoTreadmill = p149
+
+    if p149 then
+        p149 = not t1.value118()
+    end
+
+    if p149 then
+        t1.value18("Treadmill", "No treadmill found on this server.")
+    end
+end
+})
+t1.value12.TabTread:Toggle({
+	Title = "Auto-Upgrade Treadmill",
+	Desc = "Raises the belt tier while you run on it",
+	Value = false,
+	Callback = function(p150)
+    t1.value14.AutoUpgradeTreadmill = p150
+end
+})
+t1.value12.TabTread:Button({
+	Title = "Go to Treadmill",
+	Callback = function()
+    task.spawn(function()
+        local v1112 = t1.value118()
+
+        if not v1112 then
+            t1.value18("Treadmill", "No treadmill found on this server.")
+
+            return
+        end
+
+        local v1113 = t1.value71(v1112.Position, 6)
+
+        t1.value18("Treadmill", not v1113 and "Could not reach it." or "Arrived.")
+    end)
+end
+})
+t1.value12.TabConfig:Section({
+	Title = "Configuration"
+})
+t1.value12.TabConfig:Button({
+	Title = "Show Window",
+	Desc = "Also bound to Right Control",
+	Callback = function()
+    v72()
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Drop to Void",
+	Desc = "Holds five seconds in the void and waits for the respawn",
+	Callback = function()
+    task.spawn(function()
+        if not t1.value73() then
+            t1.value18("Drop to Void", "No respawn came back.", 6)
+        end
+    end)
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Copy Remote List",
+	Desc = "Puts every networking endpoint this server exposes on your clipboard",
+	Callback = function()
+    local v950 = t1.value28()
+    local v951 = table.concat(v950, "\n")
+
+    if setclipboard then
+        pcall(setclipboard, v951)
+    end
+
+    if writefile then
+        pcall(writefile, "ShardRemotes.txt", v951)
+    end
+
+    t1.value18("Remotes", #v950 .. " endpoints copied.")
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Copy Plot Dump",
+	Desc = "Puts the live plot answer and the placement result on your clipboard",
+	Callback = function()
+    task.spawn(function()
+        local v1114 = t1.value75()
+        local v1115 = t1.value82()
+        local v1116 = t1.value80()
+        local v1117 = t1.value27(t1.value25.EggLive)
+        local u1118 = v1117
+        local ok26, result25 = pcall(function()
+            return t1.value8:JSONEncode(u1118)
+        end)
+        local v1121 = "AskLiveSnapshot: " .. (ok26 and result25 or tostring(u1118))
+        local v1122 = t1.value27(t1.value25.PlotState)
+        local u1123 = v1122
+        local ok27, result26 = pcall(function()
+            return t1.value8:JSONEncode(u1123)
+        end)
+        local t40 = {
+				v1121,
+				"Homestead/AskState: " .. (ok27 and result26 or tostring(u1123)),
+				"records seen: " .. #t1.value79(),
+				"plot: " .. (v1114 and v1114:GetFullName() or "not found" .. " slot " .. tostring(t1.value11.cachedSlot)),
+				"targets: " .. #v1115 .. "  used world " .. #v1116.w,
+				"place origin: " .. t1.value11.placeOK and t1.value11.placeOK.origin or "none",
+				"place reason: " .. t1.value11.placeWhy,
+				"place log: " .. (#t1.value11.placeLog > 0) and table.concat(t1.value11.placeLog, " | ") or "none",
+				"holding: " .. tostring(t1.value83()),
+				"carrying: " .. tostring(t1.value11.carryingUid),
+				"method: " .. t1.value14.FarmMethod .. "  traps seen: " .. #t1.value11.trapList,
+				"hub: " .. tostring(t1.value64() and t1.value64() or "not found")
+			}
+        local v1127 = t1.value81()
+        local g1134
+        local g1158
+        local g1197
+        local v1196
+        for i = 1, #v1127 do
+            t40[#t40 + 1] = "origin " .. i .. ": " .. tostring(v1127[i].Position)
+        end
+        local v1129 = t1.value21()
+        if v1129 and v1127[1] then
+            t40[#t40 + 1] = "char: " .. tostring(v1129.Position) .. "  to origin1: " .. string.format("%.1f", (v1129.Position - v1127[1].Position).Magnitude)
+        end
+        if v1115[1] then
+            local w = v1115[1].w
+
+            t40[#t40 + 1] = "target1 world: " .. tostring(w)
+
+            for i = 1, #v1127 do
+                t40[#t40 + 1] = "  target1 local O" .. i .. ": " .. tostring((v1127[i]:Inverse() * CFrame.new(w)).Position)
+            end
+        end
+        local Character = t1.value9.Character
+        local v1133 = Character and Character:FindFirstChildWhichIsA("Tool")
+        repeat
+            if g1134 or not v1133 then
+                g1134 = false
+                local n26 = 0
+                for v1138, v1139 in ipairs(v1116.w) do
+
+                    n26 += 1
+
+                    if n26 > 6 then
+                        break
+                    end
+
+                    local v1140 = "egg" .. n26 .. " world: " .. tostring(v1139)
+
+                    for i = 1, #v1127 do
+                        v1140 ..= "  L" .. i .. ": " .. tostring((v1127[i]:Inverse() * CFrame.new(v1139)).Position)
+                    end
+
+                    t40[#t40 + 1] = v1140
+                end
+                if v1114 then
+                    local t41 = {}
+
+                    for _, child in ipairs(v1114:GetChildren()) do
+                        if child:IsA("BasePart") and #t41 < 14 then
+                            t41[#t41 + 1] = child.Name .. "(" .. string.format("%.0f", child.Size.X) .. "x" .. string.format("%.0f", child.Size.Z) .. ")"
+                        end
+                    end
+
+                    local ok28, result27 = pcall(function()
+                        return v1114.PrimaryPart
+                    end)
+
+                    t40[#t40 + 1] = "plot primary: " .. (ok28 and (not not result27 and result27.Name) or "none")
+                    t40[#t40 + 1] = "plot parts: " .. table.concat(t41, ", ")
+                end
+                local v1147 = t1.value11.eggList[1]
+                if v1147 then
+                    local v1148 = #t40 + 1
+                    local u1149 = v1147
+                    local ok29, result28 = pcall(function()
+                        return t1.value8:JSONEncode(u1149)
+                    end)
+                    t40[v1148] = "field egg: " .. (ok29 and result28 or tostring(u1149))
+                end
+                local v1152 = v1127[1]
+                local v1153
+                local v1154, v1155, v1156 = ipairs(t1.value7:GetChildren())
+                local v1157
+                repeat
+                    v1156, v1157 = v1154(v1155, v1156)
+
+                    if not v1156 then
+                        g1158 = true
+                    end
+
+                    if g1158 then
+                        break
+                    end
+                until v1157.Name == "PlacedEggRenders"
+                if not g1158 then
+                    v1153 = v1157
+                end
+                g1158 = false
+                if v1152 and v1153 then
+                    local n27 = 1e999
+                    local u1160
+                    for v1163, v1164 in ipairs(v1153:GetChildren()) do
+
+                        local v1165 = v1164
+                        local ok30, result29 = pcall(function()
+                            if v1165:IsA("Model") then
+                                return v1165:GetPivot()
+                            end
+
+                            if v1165:IsA("BasePart") then
+                                return v1165.CFrame
+                            end
+
+                            return nil
+                        end)
+
+                        if ok30 and result29 then
+                            local Magnitude = (Vector3.new(result29.X, 0, result29.Z) - Vector3.new(v1152.Position.X, 0, v1152.Position.Z)).Magnitude
+
+                            if Magnitude < n27 then
+                                u1160 = v1165
+                                n27 = Magnitude
+                            end
+                        end
+                    end
+                    if u1160 then
+                        local v1169 = u1160:IsA("Model") and u1160:GetPivot() or u1160.CFrame
+                        local v1170 = v1152:Inverse() * v1169
+                        local v1171, v1172, v1173 = v1170:ToEulerAnglesYXZ()
+
+                        t40[#t40 + 1] = "render nearest: " .. u1160.Name .. " (" .. u1160.ClassName .. ") dist " .. string.format("%.1f", n27) .. "  local pos " .. tostring(v1170.Position) .. "  rot deg " .. string.format("%.1f/%.1f/%.1f", math.deg(v1171), math.deg(v1172), (math.deg(v1173)))
+
+                        local ok31, result30 = pcall(function()
+                            return u1160:GetAttributes()
+                        end)
+
+                        if ok31 then
+                            ok31 = type(result30) == "table"
+                        end
+
+                        if ok31 then
+                            local v1176 = #t40 + 1
+                            local u1177 = result30
+                            local ok32, result31 = pcall(function()
+                                return t1.value8:JSONEncode(u1177)
+                            end)
+                            t40[v1176] = "render attrs: " .. (ok32 and result31 or tostring(u1177))
+                        end
+
+                        local t42 = {}
+
+                        for _, descendant in ipairs(u1160:GetDescendants()) do
+                            if #t42 >= 12 then
+                                break
+                            end
+
+                            local s1 = ""
+
+                            pcall(function()
+                                if descendant.Value ~= nil then
+                                    s1 = "=" .. tostring(descendant.Value)
+                                end
+                            end)
+                            t42[#t42 + 1] = descendant.Name .. "(" .. descendant.ClassName .. ")" .. s1
+                        end
+
+                        t40[#t40 + 1] = "render kids: " .. table.concat(t42, ", ")
+                    end
+                end
+                if type(getgc) == "function" and (type(debug) == "table" and type(debug.getconstants) == "function") then
+                    local n28 = 0
+                    local n29 = 0
+                    local timestamp = tick()
+                    local u1187 = timestamp
+                    pcall(function()
+                        for _, v in ipairs(getgc(true)) do
+                            if n28 >= 3 then
+                                return
+                            end
+                            n29 += 1
+                            if n29 > 300000 or tick() - u1187 > 4 then
+                                return
+                            end
+                            if type(v) ~= "function" then
+                                continue
+                            end
+                            local ok33, result32 = pcall(debug.getconstants, v)
+                            if ok33 then
+                                ok33 = type(result32) == "table"
+                            end
+                            if not ok33 then
+                                continue
+                            end
+                            local v1243 = false
+                            for v1246, v1247 in ipairs(result32) do
+
+                                if v1247 == "AskPlaceEgg" then
+                                    v1243 = true
+
+                                    break
+                                end
+                            end
+                            if v1243 then
+                                n28 += 1
+
+                                local t43 = {}
+
+                                for _, v10 in ipairs(result32) do
+                                    if type(v10) == "string" and #v10 < 40 then
+                                        t43[#t43 + 1] = v10
+                                    end
+                                end
+
+                                local s2 = "?"
+                                local ok34, result33 = pcall(function()
+                                    return debug.getinfo(v)
+                                end)
+
+                                if ok34 then
+                                    ok34 = type(result33) == "table"
+                                end
+
+                                if ok34 then
+                                    s2 = tostring(result33.short_src or (result33.source or "?")) .. ":" .. tostring(result33.linedefined or (result33.currentline or "?"))
+                                end
+
+                                t40[#t40 + 1] = "AskPlaceEgg caller " .. n28 .. " [" .. s2 .. "] consts: " .. table.concat(t43, ",")
+                            end
+                        end
+                    end)
+                    if n28 == 0 then
+                        t40[#t40 + 1] = "payload probe: no AskPlaceEgg caller found (scanned " .. n29 .. ")"
+                    end
+                else
+                    t40[#t40 + 1] = "payload probe: introspection API unavailable"
+                end
+                local v1188 = table.concat(t40, "\n\n")
+                if setclipboard then
+                    pcall(setclipboard, v1188)
+                end
+                if writefile then
+                    pcall(writefile, "ShardPlot.txt", v1188)
+                end
+                t1.value18("Plot Dump", "Copied. Also saved as ShardPlot.txt.", 6)
+
+                return
+            end
+
+            local ok35, result34 = pcall(function()
+                return v1133:GetAttributes()
+            end)
+            local v1191 = #t40 + 1
+            local Name = v1133.Name
+
+            if "  attrs: " .. ok35 then
+                local u1193 = result34
+                local ok36, result35 = pcall(function()
+                    return t1.value8:JSONEncode(u1193)
+                end)
+                v1196 = ok36 and result35 or tostring(u1193)
+                if v1196 then
+                    g1197 = true
+                end
+            end
+
+            if not g1197 then
+                v1196 = "?"
+            end
+
+            g1197 = false
+            t40[v1191] = "held tool: " .. Name .. v1196
+
+            local t44 = {}
+
+            for _, descendant in ipairs(v1133:GetDescendants()) do
+                if #t44 >= 10 then
+                    break
+                end
+
+                local s3 = ""
+
+                pcall(function()
+                    if descendant.Value ~= nil then
+                        s3 = "=" .. tostring(descendant.Value)
+                    end
+                end)
+                t44[#t44 + 1] = descendant.Name .. "(" .. descendant.ClassName .. ")" .. s3
+            end
+
+            t40[#t40 + 1] = "held tool kids: " .. table.concat(t44, ", ")
+            g1134 = true
+        until not g1134
+    end)
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Copy Place Source",
+	Desc = "Reads the game's own egg placement module so the exact call is known",
+	Callback = function()
+    task.spawn(function()
+        local t45 = {}
+        local v1203 = type(decompile) == "function"
+
+        local function v1204(p151)
+            local t46 = {}
+            local ok37, result36 = pcall(debug.getconstants, p151)
+
+            if ok37 then
+                ok37 = type(result36) == "table"
+            end
+
+            if ok37 then
+                for _, v in ipairs(result36) do
+                    if type(v) == "string" and #v < 48 then
+                        t46[#t46 + 1] = v
+                    end
+                end
+            end
+
+            return t46
+        end
+
+        if v1203 then
+            local n30 = 0
+
+            for _, descendant in ipairs(t1.value6:GetDescendants()) do
+                if n30 >= 4 then
+                    break
+                end
+
+                if descendant:IsA("ModuleScript") or descendant:IsA("LocalScript") then
+                    local v1208 = descendant.Name:lower()
+
+                    if v1208:find("egg") or (v1208:find("plac") or (v1208:find("build") or v1208:find("plot"))) then
+                        local ok38, result37 = pcall(decompile, descendant)
+
+                        if ok38 and (type(result37) == "string" and result37:find("PlantEgg", 1, true)) or result37:find("AskPlaceEgg", 1, true) then
+                            n30 += 1
+                            pcall(writefile, "ShardPlace_" .. descendant.Name .. ".txt", result37)
+
+                            local v1211 = #t45 + 1
+                            local FullName = descendant:GetFullName()
+                            local v1213 = result37:find("PlantEgg", 1, true)
+                            local v1214 = " ==\n" .. if not v1213 then nil else result37:sub(math.max(1, v1213 - 1500), v1213 + 900)
+
+                            if not v1214 then
+                                local v1215 = result37:find("AskPlaceEgg", 1, true)
+
+                                v1214 = ((if not v1215 then nil else result37:sub(math.max(1, v1215 - 1500), v1215 + 900))) or result37:sub(1, 2200)
+                            end
+
+                            t45[v1211] = "== " .. FullName .. v1214
+                        end
+                    end
+                end
+            end
+        end
+
+        if type(getgc) == "function" and (type(debug) == "table" and type(debug.getconstants) == "function") then
+            local timestamp = tick()
+            local n31 = 0
+            local n32 = 0
+            local u1219 = timestamp
+            pcall(function()
+                local g1273
+                local v1272
+                for _, v in ipairs(getgc(true)) do
+                    if n31 >= 4 then
+                        return
+                    end
+
+                    n32 += 1
+
+                    if n32 > 400000 or tick() - u1219 > 5 then
+                        return
+                    end
+
+                    if type(v) == "function" then
+                        local v1269 = v1204(v)
+
+                        for _, v11 in ipairs(v1269) do
+                            if v11 == "PlantEgg" then
+                                v1272 = true
+                                g1273 = true
+                            end
+
+                            if g1273 then
+                                break
+                            end
+                        end
+
+                        if not g1273 then
+                            v1272 = false
+                        end
+
+                        g1273 = false
+
+                        if v1272 then
+                            n31 += 1
+
+                            local s4 = "?"
+                            local ok39, result38 = pcall(function()
+                                return debug.getinfo(v)
+                            end)
+
+                            if ok39 then
+                                ok39 = type(result38) == "table"
+                            end
+
+                            if ok39 then
+                                local _tostring = tostring
+                                local short_src = result38.short_src
+
+                                if not short_src then
+                                    short_src = result38.source or "?"
+                                end
+
+                                s4 = _tostring(short_src) .. ":" .. tostring(result38.linedefined or "?")
+                            end
+
+                            t45[#t45 + 1] = "PlantEgg caller " .. n31 .. " [" .. s4 .. "] consts: " .. table.concat(v1269, ",")
+
+                            if type(debug.getprotos) == "function" then
+                                local ok40, result39 = pcall(debug.getprotos, v)
+
+                                if ok40 then
+                                    ok40 = type(result39) == "table"
+                                end
+
+                                if ok40 then
+                                    for _, v12 in ipairs(result39) do
+                                        t45[#t45 + 1] = "  proto consts: " .. table.concat(v1204(v12), ",")
+                                    end
+                                end
+                            end
+
+                            if v1203 then
+                                local ok41, result40 = pcall(decompile, v)
+
+                                if ok41 then
+                                    ok41 = type(result40) == "string" and #result40 > 0
+                                end
+
+                                if ok41 then
+                                    t45[#t45 + 1] = "  caller src:\n" .. result40:sub(1, 1800)
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+            if n31 == 0 then
+                t45[#t45 + 1] = "no PlantEgg caller in getgc (scanned " .. n32 .. ")"
+            end
+        end
+
+        local v1220 = t1.value6:FindFirstChild("Client") and t1.value6.Client:FindFirstChild("EggState") or nil
+
+        if not v1220 then
+            for _, descendant in ipairs(t1.value6:GetDescendants()) do
+                if descendant.Name == "EggState" and descendant:IsA("ModuleScript") then
+                    v1220 = descendant
+
+                    break
+                end
+            end
+        end
+
+        if v1220 and v1203 then
+            local ok42, result41 = pcall(decompile, v1220)
+
+            if ok42 then
+                ok42 = type(result41) == "string" and #result41 > 0
+            end
+
+            if ok42 then
+                pcall(writefile, "ShardEggState.txt", result41)
+
+                local v1225 = #t45 + 1
+                local v1226 = result41:find("AskPlaceEgg", 1, true)
+
+                t45[v1225] = "== EggState ==\n" .. (if not v1226 then nil else result41:sub(math.max(1, v1226 - 1500), v1226 + 900)) or result41:sub(1, 1200)
+            end
+        end
+
+        if #t45 == 0 then
+            t45[#t45 + 1] = "decompile + introspection unavailable on this executor"
+        end
+
+        local v1227 = table.concat(t45, "\n\n")
+
+        if setclipboard then
+            pcall(setclipboard, v1227)
+        end
+
+        if writefile then
+            pcall(writefile, "ShardPlaceSrc.txt", v1227)
+        end
+
+        t1.value18("Place Source", "Copied. Saved ShardPlaceSrc.txt + per-module files.", 6)
+    end)
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Reset Hop Count",
+	Desc = "Clears the stored hop total so Max Hops starts over",
+	Callback = function()
+    t1.value14.HopCount = 0
+    t1.value122(0)
+    t1.value18("Server Hop", "Hop count reset.")
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Rejoin Server",
+	Callback = function()
+    pcall(function()
+        t1.value5:TeleportToPlaceInstance(game.PlaceId, game.JobId, t1.value9)
+    end)
+end
+})
+t1.value12.TabConfig:Button({
+	Title = "Unload Script",
+	Desc = "Stops every loop and closes the window",
+	Callback = function()
+    t1.value126()
+    pcall(function()
+        t1.value12.Window:Destroy()
+    end)
+end
+})
+t1.value151 = {
+	spawned = {},
+	orbitRadius = 4,
+	orbitSpeed = 0.8,
+	conn = nil,
+	petNames = {},
+	inputName = ""
+}
+t1.value152 = Instance.new("Folder")
+t1.value152.Name = "ShardVisualPets"
+t1.value152.Parent = t1.value7
+function t1.value153()
+    local t47 = {}
+    local t48 = {}
+    local function v954(p152)
+        if not p152:IsA("Model") then
+            return
+        end
+
+        local v1229 = p152.Name:lower()
+
+        if v1229:find("humanoid") or v1229:find("egg") then
+            return
+        end
+
+        local v1230 = p152:FindFirstChildWhichIsA("BasePart") ~= nil
+        local v1231 = p152.Parent and p152.Parent.Name:lower() or ""
+
+        if (v1230 and v1231:find("pet") or (v1231:find("pen") or (v1231:find("render") or (v1231:find("slot") or p152:FindFirstChildWhichIsA("AnimationController"))))) and not t47[p152.Name] then
+            t47[p152.Name] = true
+            t48[#t48 + 1] = p152.Name
+        end
+    end
+    for v957, v958 in ipairs(t1.value102()) do
+
+        local GetDescendants = v958.GetDescendants
+
+        for _, v in ipairs(GetDescendants(v958)) do
+            v954(v)
+        end
+    end
+    for _, child in ipairs(t1.value7:GetChildren()) do
+        for _, child3 in ipairs(child:GetChildren()) do
+            v954(child3)
+        end
+    end
+    table.sort(t48)
+    t1.value151.petNames = t48
+
+    return t48
+end
+function t1.value154(p153)
+    local v967 = p153:lower()
+    for v970, v971 in ipairs(t1.value102()) do
+
+        for _, descendant in ipairs(v971:GetDescendants()) do
+            if descendant:IsA("Model") and descendant.Name:lower():find(v967, 1, true) and descendant:FindFirstChildWhichIsA("BasePart") then
+                return descendant
+            end
+        end
+    end
+    for _, descendant in ipairs(t1.value7:GetDescendants()) do
+        local v976 = descendant:IsA("Model")
+
+        if v976 then
+            v976 = descendant.Name:lower():find(v967, 1, true)
+
+            if v976 then
+                v976 = not descendant:IsDescendantOf(t1.value152)
+            end
+        end
+
+        if v976 and descendant:FindFirstChildWhichIsA("BasePart") then
+            return descendant
+        end
+    end
+
+    return nil
+end
+function t1.value155(p154)
+    local v982 = t1.value154(p154)
+    if not v982 then
+        t1.value18("Visual Pets", "Could not find a model named: " .. p154, 4)
+
+        return
+    end
+    local clone = v982:Clone()
+    for v986, v987 in ipairs(clone:GetDescendants()) do
+
+        if v987:IsA("Script") or (v987:IsA("LocalScript") or v987:IsA("ModuleScript")) then
+            v987:Destroy()
+        end
+    end
+    for _, descendant in ipairs(clone:GetDescendants()) do
+        if descendant:IsA("BasePart") then
+            descendant.Anchored = true
+            descendant.CanCollide = false
+            descendant.CanTouch = false
+            descendant.CastShadow = false
+        end
+    end
+    clone.Name = "VP_" .. p154
+    clone.Parent = t1.value152
+    local v990 = #t1.value151.spawned * (6.283185307179586 / math.max(1, #t1.value151.spawned + 1))
+    t1.value151.spawned[#t1.value151.spawned + 1] = {
+		model = clone,
+		angle = v990
+	}
+    t1.value18("Visual Pets", "Spawned " .. p154 .. " (client only).", 3)
+end
+function t1.value156()
+    for _, v in ipairs(t1.value151.spawned) do
+        local v980 = v
+
+        pcall(function()
+            v980.model:Destroy()
+        end)
+    end
+
+    t1.value151.spawned = {}
+end
+function t1.value157()
+    if #t1.value151.spawned == 0 then
+        return
+    end
+
+    local v977 = table.remove(t1.value151.spawned)
+
+    pcall(function()
+        v977.model:Destroy()
+    end)
+end
+t1.value151.conn = t1.value3.Heartbeat:Connect(function(_)
+    local v992 = t1.value21()
+
+    if not v992 or #t1.value151.spawned == 0 then
+        return
+    end
+
+    local timestamp = tick()
+    local v994 = v992.Position + Vector3.new(0, 1, 0)
+    local v995 = #t1.value151.spawned
+
+    for i, v in ipairs(t1.value151.spawned) do
+        local v998 = v
+        local v999 = (i - 1) * (6.283185307179586 / v995) + timestamp * t1.value151.orbitSpeed
+        local v1000 = math.cos(v999) * t1.value151.orbitRadius
+        local v1001 = math.sin(v999) * t1.value151.orbitRadius
+        local v1002 = v994 + Vector3.new(v1000, 0, v1001)
+
+        if v998.model.PrimaryPart or v998.model:FindFirstChildWhichIsA("BasePart") then
+            pcall(function()
+                v998.model:PivotTo(CFrame.new(v1002) * CFrame.Angles(0, v999 + 3.141592653589793, 0))
+            end)
+        end
+    end
+end)
+v5(t1.value151.conn)
+t1.value12.TabVisualPet:Section({
+	Title = "Visual Pets (Client Only)"
+})
+t1.value158 = t1.value12.TabVisualPet:Dropdown({
+	Title = "Pet",
+	Desc = "Pick from pets found in the world",
+	Values = { "Scanning..." },
+	Value = 1,
+	Callback = function(p156)
+    local v1004 = type(p156) == "table" and next(p156) or p156
+
+    if type(v1004) == "string" then
+        t1.value151.inputName = v1004
+    end
+end
+})
+t1.value12.TabVisualPet:Button({
+	Title = "Refresh Pet List",
+	Desc = "Re-scans workspace for pet models",
+	Callback = function()
+    local v1005 = t1.value153()
+
+    if #v1005 > 0 then
+        pcall(function()
+            t1.value158:Refresh(v1005)
+        end)
+        pcall(function()
+            t1.value158:SetValues(v1005)
+        end)
+        t1.value18("Visual Pets", #v1005 .. " pets found.", 3)
+
+        return
+    end
+
+    t1.value18("Visual Pets", "No pet models found yet — try after the game loads.", 4)
+end
+})
+t1.value12.TabVisualPet:Input({
+	Title = "Custom Name",
+	Desc = "Type a pet name manually if it's not in the list",
+	Placeholder = "e.g. Dragon",
+	Callback = function(p157)
+    t1.value151.inputName = p157
+end
+})
+local TabVisualPet = t1.value12.TabVisualPet
+local Slider4 = TabVisualPet.Slider
+local t49 = {
+	Min = 2,
+	Max = 20,
+	Default = 4
+}
+Slider4(TabVisualPet, {
+	Title = "Orbit Radius",
+	Desc = "How far pets orbit from you",
+	Step = 1,
+	Value = t49,
+	Callback = function(p158)
+    t1.value151.orbitRadius = p158
+end
+})
+local TabVisualPet2 = t1.value12.TabVisualPet
+local Slider5 = TabVisualPet2.Slider
+local t50 = {
+	Min = 0,
+	Max = 10,
+	Default = 1
+}
+Slider5(TabVisualPet2, {
+	Title = "Orbit Speed",
+	Desc = "How fast pets spin around you",
+	Step = 1,
+	Value = t50,
+	Callback = function(p159)
+    t1.value151.orbitSpeed = p159 * 0.2
+end
+})
+local TabVisualPet3 = t1.value12.TabVisualPet
+local fromHex = Color3.fromHex
+local Button = TabVisualPet3.Button
+local v115 = fromHex("#30FF6A")
+
+Button(TabVisualPet3, {
+	Title = "Spawn Pet",
+	Desc = "Clones the selected/typed pet around your character",
+	Color = v115,
+	Callback = function()
+    if t1.value151.inputName == "" then
+        t1.value18("Visual Pets", "Select a pet from the list or type a custom name.", 4)
+
+        return
+    end
+
+    t1.value155(t1.value151.inputName)
+end
+})
+t1.value12.TabVisualPet:Button({
+	Title = "Remove Last Pet",
+	Callback = function()
+    t1.value157()
+end
+})
+local TabVisualPet4 = t1.value12.TabVisualPet
+local color3_11 = Color3.fromHex("#FF4830")
+
+TabVisualPet4:Button({
+	Title = "Remove All Pets",
+	Color = color3_11,
+	Callback = function()
+    t1.value156()
+    t1.value18("Visual Pets", "All visual pets removed.", 3)
+end
+})
+task.delay(3, function()
+    local v1009 = t1.value153()
+
+    if #v1009 > 0 then
+        pcall(function()
+            t1.value158:Refresh(v1009)
+        end)
+        pcall(function()
+            t1.value158:SetValues(v1009)
+        end)
+    end
+end)
+pcall(function()
+    t1.value12.Window:SelectTab(1)
+end)
+task.spawn(function()
+    if not t1.value23() then
+        t1.value9.CharacterAdded:Wait()
+        task.wait(0.7)
+    end
+
+    t1.value49(true)
+
+    if #t1.value13.areaOrder > 0 then
+        t1.value36()
+        t1.value40()
+        t1.value44("AreaFocus", t1.value37())
+    end
+end)
+
+if not t1.value24 then
+    t1.value18("Shard Hub", "Packages.Networking is missing, remote features are offline.", 8)
+
+    return
+end
+t1.value18("Shard Hub", "Loaded. " .. #t1.value13.areaOrder .. " areas, " .. #t1.value28() .. " endpoints.", 5)
